@@ -1,0 +1,4 @@
+﻿  Bitmap1.cpp
+C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap1.cpp(58): warning C4018: '<': signed/unsigned mismatch
+C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap1.cpp(94): warning C4018: '<': signed/unsigned mismatch
+  Digital-Image-Processing.vcxproj -> C:\Users\MSII\source\repos\Digital-Image-Processing\Debug\Digital-Image-Processing.exe
