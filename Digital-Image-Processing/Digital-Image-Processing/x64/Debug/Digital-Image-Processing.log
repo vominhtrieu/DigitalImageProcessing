@@ -1,8 +1,0 @@
-﻿  Bitmap2.cpp
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(62): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(64): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(79): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(84): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(89): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\MSII\source\repos\Digital-Image-Processing\Digital-Image-Processing\Bitmap2.cpp(30): warning C4715: 'GetPixel': not all control paths return a value
-  Digital-Image-Processing.vcxproj -> C:\Users\MSII\source\repos\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe
