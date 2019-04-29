@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Bitmap.h"
 using namespace std;
-//hihihi
+//Test
 int main()
 {
 	char *inFileName = (char*)malloc(100*sizeof(char));
@@ -38,7 +38,6 @@ int main()
 			#else
 				system("open out.bmp");
 			#endif
-			DisposeBitmap(bmp);
 			printf("Would you like to continue?(Y/N)");
 			scanf("\n%c", &next);
 			#ifdef _WIN32
@@ -47,6 +46,7 @@ int main()
 				system("clear");
 			#endif
 		}
+		DisposeBitmap(bmp);
 	}
 	else
 		printf("Can not load the bitmap file!!!\n");
