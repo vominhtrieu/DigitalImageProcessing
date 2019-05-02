@@ -69,6 +69,41 @@ void BlackWhite(const Bitmap& bmp)
 			SetPixel(bmp, row, col, color);
 		}
 }
+void reverse_image(const Bitmap &bmp,int k)
+{
+	switch (k)
+	{
+	case 1:
+		for (int row = 0; row < bmp.height; row++)
+			for (int col = 0; col < bmp.width / 2; col++)
+			{
+				Color color1, color2;
+				GetPixel(bmp, row, col, color1);
+				GetPixel(bmp, row, bmp.width - col - 1, color2);
+				Color temp = color1;
+				color1 = color2;
+				color2 = temp;
+				SetPixel(bmp, row, col, color1);
+				SetPixel(bmp, row, bmp.width - col - 1, color2);
+			}
+		break;
+	default:
+		for (int row = 0; row < bmp.height/2; row++)
+			for (int col = 0; col < bmp.width; col++)
+			{
+				Color color1, color2;
+				GetPixel(bmp, row, col, color1);
+				GetPixel(bmp, bmp.height-row-1, col, color2);
+				Color temp = color1;
+				color1 = color2;
+				color2 = temp;
+				SetPixel(bmp, row, col, color1);
+				SetPixel(bmp, bmp.height - row - 1, col, color2);
+			}
+		break;
+	}
+
+}
 
 void AdjustBrightness(const Bitmap &bmp, double factor)
 {
