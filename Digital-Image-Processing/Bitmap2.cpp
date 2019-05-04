@@ -107,26 +107,57 @@ void reverse_image(const Bitmap &bmp,int k)
 
 void AdjustBrightness(const Bitmap &bmp, double factor)
 {
+	Color color;
 	for(int row = 0; row < bmp.height; row++)
 		for(int col = 0; col < bmp.width; col++)
 		{
-			Color color;
 			GetPixel(bmp, row, col, color);
-			if(color.R*factor > 255)
+
+			double  min = color.R, 
+					max = color.R, 
+					light, 
+					k;
+
+			if (min > color.G) 
+				min = color.G;
+
+			if (min > color.B) 
+				min = color.B;
+
+			if (max < color.G) 
+				max = color.G;
+
+			if (max < color.B) 
+				max = color.B;
+
+			if (color.R*factor > 255)
 				color.R = 255;
 			else
 				color.R = color.R*factor;
-			
-			if(color.G*factor > 255)
+
+			if (color.G*factor > 255)
 				color.G = 255;
-			else
+			else 
 				color.G = color.G*factor;
-			
-			if(color.B*factor > 255)
+
+			if (color.B*factor > 255)
 				color.B = 255;
-			else
+			else 
 				color.B = color.B*factor;
 			
+			light = (min + max)/2;
+			if (light > 200 && light<240) {
+				k = 0.8;
+				color.R = color.R*k;
+				color.B = color.B*k;
+				color.G = color.G*k;
+			}
+			if (light>=240) {
+				k = 0.6;
+				color.R = color.R*k;
+				color.B = color.B*k;
+				color.G = color.G*k;
+			}
 			SetPixel(bmp, row, col, color);
 		}
 }

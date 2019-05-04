@@ -30,7 +30,7 @@ int main()
 				break;
 			case 3:
 				int k;
-				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
+				printf("1.Dao nguoc theo be doc.\n2.Dao nguoc theo be ngang\n");
 				scanf("%d", &k);
 				reverse_image(bmp,k);
 				break;
