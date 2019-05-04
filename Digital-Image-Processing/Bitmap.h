@@ -26,5 +26,6 @@ void BlackWhite(const Bitmap& bmp);
 void reverse_image(const Bitmap &bmp,int k);
 void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
+void zoomimage(const Bitmap &inbmp, Bitmap &outbmp, int k);
 
 #endif

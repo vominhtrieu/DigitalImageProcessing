@@ -7,7 +7,7 @@ int main()
 {
 	char *inFileName = (char*)malloc(100*sizeof(char));
 	const char *outFileName= "out.bmp";
-	Bitmap bmp;
+	Bitmap bmp, outbmp;
 	printf("Enter file path:");
 	scanf("%s", inFileName);
 	int option;
@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Zoomimage\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -33,6 +33,12 @@ int main()
 				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
 				scanf("%d", &k);
 				reverse_image(bmp,k);
+				break;
+			case 4:
+				int m;
+				printf("Nhap do zoom: ");
+				scanf("%d", &m);
+				zoomimage(bmp, outbmp, m);
 				break;
 			default:
 				printf("Wrong command!");

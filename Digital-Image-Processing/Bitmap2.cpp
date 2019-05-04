@@ -148,3 +148,35 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
 		}
 }
+
+void zoomimage(const Bitmap &inbmp, Bitmap &outbmp, int k)
+{
+	outbmp.width = k * inbmp.width;
+	outbmp.height = k * inbmp.height;
+	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
+	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
+	for (int row = 0; row < inbmp.height; row++)
+		for (int col = 0; col < inbmp.width; col++)
+		{
+			Color color;
+			GetPixel(inbmp, row, col, color);
+			SetPixel(outbmp, k*row, k*col, color);
+			SetPixel(outbmp, k*row, k*col + 1, color);
+			SetPixel(outbmp, k*row + 1, k*col, color);
+			SetPixel(outbmp, k*row + 1, k*col + 1, color);
+		}
+
+
+	for (int row = 0; row < inbmp.height; row++)
+		for (int col = 0; col < inbmp.width; col++)
+		{
+			Color color3;
+			Color color4;
+
+			GetPixel(inbmp, row, col, color3);
+			GetPixel(outbmp, row + (outbmp.height * (k - 1)) / (2 * k), col + (outbmp.width * (k - 1)) / (2 * k), color4);
+			color3 = color4;
+
+			SetPixel(inbmp, row, col, color3);
+		}
+}
