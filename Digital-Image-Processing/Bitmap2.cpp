@@ -148,3 +148,30 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
 		}
 }
+
+void Rotate(Bitmap &inbmp)
+{
+	Bitmap outbmp;
+	outbmp.width = inbmp.height;
+	outbmp.height = inbmp.width;
+	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
+	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
+	int rowo = 0;
+	int colo = outbmp.width - 1;
+	for (int row = 0; row < inbmp.height; row++)
+	{
+		int rowo = 0;
+		for (int col = 0; col < inbmp.width; col++)
+		{
+			Color color;
+			GetPixel(inbmp, row, col, color);
+			SetPixel(outbmp, rowo, colo, color);
+			rowo++;
+		}
+		colo--;
+	}
+	inbmp.width = outbmp.width;
+	inbmp.height = outbmp.height;
+	inbmp.pixels = outbmp.pixels;
+	inbmp.rowSize = outbmp.rowSize;
+}
