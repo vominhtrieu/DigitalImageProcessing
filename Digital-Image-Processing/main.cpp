@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Reverse.\n4Rotate.");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -33,6 +33,9 @@ int main()
 				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
 				scanf("%d", &k);
 				reverse_image(bmp,k);
+				break;
+			case 4:
+				Rotate(bmp);
 				break;
 			default:
 				printf("Wrong command!");
