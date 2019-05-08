@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include "Bitmap.h"
 using namespace std;
 //Test
@@ -17,7 +18,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Flip.\n4.Face Detect.\n5.Resize.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -34,6 +35,11 @@ int main()
 				scanf("%d", &k);
 				reverse_image(bmp,k);
 				break;
+			case 4:
+				FaceDetect(bmp);
+				break;
+			case 5:
+				printf("Enter New Size(WxH):");
 			default:
 				printf("Wrong command!");
 				break;
