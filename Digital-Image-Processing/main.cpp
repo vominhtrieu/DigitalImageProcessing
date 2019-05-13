@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
 #include "Bitmap.h"
 using namespace std;
 //Test

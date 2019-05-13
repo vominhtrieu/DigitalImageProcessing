@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Bitmap1.cpp" />
     <ClCompile Include="Bitmap2.cpp" />
+    <ClCompile Include="FaceDetect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

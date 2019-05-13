@@ -1,6 +1,10 @@
 #ifndef _BITMAP_
 #define _BITMAP_
-
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
+#include <fstream>
+using namespace std;
 #pragma warning(disable:4996)
 struct Bitmap
 {
@@ -12,7 +16,7 @@ struct Bitmap
 
 struct Color
 {
-	unsigned char R, G, B;
+	char R, G, B;
 };
 
 int LoadBitmap(const char *fname, Bitmap &bmp);
