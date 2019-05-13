@@ -179,3 +179,46 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
 		}
 }
+void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
+{
+	int i, j,h,w;
+	double gauss[10][10], pi=3.14159,sigma=20.0,sum=0;
+	Color color, color1, color2;
+	
+	//Gaussian
+	for(i=0;i<10;i++)
+		for (j = 0; j < 10; j++)
+		{
+			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+			sum += gauss[i][j];
+		}
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 10; j++) {
+			gauss[i][j] /= sum;
+		}
+	}
+
+	//Blured Image
+	for (i = 0; i < inbmp.height; i++) 
+		for (j = 0; j < inbmp.width; j++) {
+			if (((i - TamElip.y)*(i - TamElip.y) / (doc*doc)) + ((j - TamElip.x)*(j - TamElip.x) / (ngang*ngang)) > 1)
+			{
+				GetPixel(inbmp, i, j, color);
+				color2.B = 0;
+				color2.G = 0;
+				color2.R = 0;
+				for (h = i; h < i + 10; h++)
+					for (w = j; w < j + 10; w++) {
+						
+						GetPixel(inbmp, h, w, color1);
+						
+						color2.B += gauss[h - i][w - j] * color1.B;
+						color2.R += gauss[h - i][w - j] * color1.R;
+						color2.G += gauss[h - i][w - j] * color1.G;
+					}
+				
+				SetPixel(inbmp, i, j, color2);
+			}
+		}
+	
+}

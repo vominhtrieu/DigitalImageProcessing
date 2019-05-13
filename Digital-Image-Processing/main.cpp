@@ -7,7 +7,7 @@ int main()
 {
 	char *inFileName = (char*)malloc(100*sizeof(char));
 	const char *outFileName= "out.bmp";
-	Bitmap bmp;
+	Bitmap bmp,bmpout;
 	printf("Enter file path:");
 	scanf("%s", inFileName);
 	int option;
@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -26,7 +26,10 @@ int main()
 				BlackWhite(bmp);
 				break;
 			case 2:
-				AdjustBrightness(bmp, 2);
+				float a;
+				cout << "nhap do tang sang: ";
+				cin >> a;
+				AdjustBrightness(bmp, a);
 				break;
 			case 3:
 				int k;
@@ -36,6 +39,16 @@ int main()
 				break;
 			default:
 				printf("Wrong command!");
+				break;
+			case 4:
+				Toado tam;
+				float ax, b;
+				
+				cout << "nhap toa do tam: "<<endl;
+				cin >> tam.x >> tam.y;
+				cout << "Nhap be ngang, doc cau elip: "<<endl;
+				cin >> ax; cin >> b;
+				BlurImage(bmp,tam,ax,b);
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))
