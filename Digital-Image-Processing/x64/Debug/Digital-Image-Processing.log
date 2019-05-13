@@ -1,1 +1,9 @@
-﻿  Digital-Image-Processing.vcxproj -> C:\Users\Thuy Nguyen\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe
+﻿  Bitmap2.cpp
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(62): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(64): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(179): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(195): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(200): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(205): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\thuy nguyen\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(30): warning C4715: 'GetPixel': not all control paths return a value
+  Digital-Image-Processing.vcxproj -> C:\Users\Thuy Nguyen\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe

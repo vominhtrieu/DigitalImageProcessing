@@ -147,10 +147,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="lena.bmp" />
     <Image Include="MARBLES.BMP" />
     <Image Include="n.bmp" />
     <Image Include="out.bmp" />
     <Image Include="test.bmp" />
+    <Image Include="test1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

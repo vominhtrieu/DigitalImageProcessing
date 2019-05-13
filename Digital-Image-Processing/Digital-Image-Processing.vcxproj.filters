@@ -43,5 +43,11 @@
     <Image Include="test.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="test1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lena.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

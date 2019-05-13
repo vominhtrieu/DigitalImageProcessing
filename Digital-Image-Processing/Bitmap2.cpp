@@ -69,6 +69,20 @@ void BlackWhite(const Bitmap& bmp)
 			SetPixel(bmp, row, col, color);
 		}
 }
+
+void Negative(const Bitmap& bmp)
+{
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			color.R = 255-color.R;
+			color.G = 255-color.G;
+			color.B = 255-color.B;
+			SetPixel(bmp, row, col, color);
+		}
+}
 void reverse_image(const Bitmap &bmp,int k)
 {
 	switch (k)
@@ -103,6 +117,69 @@ void reverse_image(const Bitmap &bmp,int k)
 		break;
 	}
 
+}
+double Truncate(double R)
+{
+	if (R < 0)
+		return 0;
+	if (R > 255) return 255;
+	return R;
+}
+double max(double a, double b)
+{
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+/*void AutoContrastAdjustment(const Bitmap &bmp)
+{
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			if (color.R > 255 - 20) color.R = 255;
+			else if (color.R >= 100 && color.R <= 255 - 20) color.R += 20;
+			else if (color.R < 100 && color.R >70) color.R += 10;
+			else if (color.R < 60 && color.R >= 40) color.R -= 10;
+			else if (color.R < 40 && color.R >= 20) color.R -= 20;
+			else if (color.R < 20) color.R = 0;
+
+			if (color.G > 255 - 20) color.G = 255;
+			else if (color.G >= 100 && color.G <= 255 - 20) color.G += 20;
+			else if (color.G < 100 && color.G >70) color.G += 10;
+			else if (color.G < 60 && color.G >= 40) color.G -= 10;
+			else if (color.G < 40 && color.G >= 20) color.G -= 20;
+			else if (color.G < 20) color.G = 0;
+
+			if (color.B > 255 - 20) color.B = 255;
+			else if (color.B >= 100 && color.B <= 255 - 20) color.B += 20;
+			else if (color.B < 100 && color.B >70) color.B += 10;
+			else if (color.B < 60 && color.B >= 40) color.B -= 10;
+			else if (color.B < 40 && color.B >= 20) color.B -= 20;
+			else if (color.B < 20) color.B = 0;
+
+			SetPixel(bmp, row, col, color);
+		}
+}*/
+
+void ContrastAdjustment(const Bitmap &bmp, int C)
+{
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			double r, g, b;
+			r = (C * (color.R - 128)/100 + 128);
+			g = (C * (color.G - 128)/100 + 128);
+			b = (C * (color.B - 128)/100 + 128);
+			color.R = Truncate(r); color.G = Truncate(g); color.B = Truncate(b);
+
+			SetPixel(bmp, row, col, color);
+		}
 }
 
 void AdjustBrightness(const Bitmap &bmp, double factor)
