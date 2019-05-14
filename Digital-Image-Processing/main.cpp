@@ -20,7 +20,6 @@ int main()
 			switch (option)
 			{
 			case 1:
-				
 				BlackWhite(bmp);
 				break;
 			case 2:

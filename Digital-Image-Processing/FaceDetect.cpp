@@ -11,7 +11,7 @@ struct Position
 	int X,Y;
 };
 
-double similarThreshold1 = 30, similarThreshold2 = 20, threshold1 = 260, threshold2 = 50;
+double similarThreshold1 = 30, similarThreshold2 = 20, threshold1 = 250, threshold2 = 50;
 
 double SimilarFeatures(Bitmap bmp1, Bitmap bmp2, double similarThreshold)
 {
@@ -38,7 +38,7 @@ double SimilarFeatures(Bitmap bmp1, Bitmap bmp2, double similarThreshold)
 	return dem;
 }
 
-void FixColor(char &color)
+void FixColor(unsigned char &color)
 {
 	if (color == 13 || color == 0 || color == 27 || color == 32)
 		color++;
@@ -135,17 +135,18 @@ void BrowseImage(Bitmap bmp, Images* face, Images* noface)
 	cout << "Detecting...\n";
 	Position maxPos = { 0,0 };
 	Position minPos = { bmp.width - 1, bmp.height - 1 };
+	cout << "       ";
 	for (int i = 0; i < bmp.height - 28; i++)
 	{
 		for (int j = 0; j < bmp.width - 28; j++)
 		{
-			//printf("\b\b\b\b%3.0f", (i * bmp.width + j)*100.0 / ((bmp.width-27)*(bmp.height-27)));
+			printf("\b\b\b\b\b\b%3.2f%%", (i*(bmp.width - 29) + j)*100.0 / ((bmp.width - 29)*(bmp.height - 29)));
 			image = GetImage(bmp, i, j);
 			if (Classifier(image, noface, threshold2, similarThreshold2, 0) == -1)
 			{
 				if (Classifier(image, face, threshold1, similarThreshold1) != -1)
 				{
-					DrawRect(bmp, i, j, 28, 28);
+					//DrawRect(bmp, i, j, 28, 28);
 					if (i < minPos.Y)
 						minPos.Y = i;
 					if (i > maxPos.Y)
@@ -161,7 +162,8 @@ void BrowseImage(Bitmap bmp, Images* face, Images* noface)
 	}
 	int width = maxPos.X - minPos.X + 28;
 	int height = maxPos.Y - minPos.Y + 28;
-	DrawRect(bmp, minPos.Y, minPos.X, height, width);
+	//DrawRect(bmp, minPos.Y, minPos.X, height, width);
+	BlurImage(bmp, { (maxPos.X + minPos.X) / 2, (maxPos.Y + minPos.Y) / 2}, width, height);
 }
 
 void SaveClassifier(const char* firstImage, const char* fileName)
@@ -216,9 +218,13 @@ void LoadClassifier(Images* &images, const char* path)
 			for (int j = 0; j < 28; j++)
 			{
 				Color color;
-				file.get(color.R);
-				file.get(color.G);
-				file.get(color.B);
+				char code;
+				file.get(code);
+				color.R = static_cast<unsigned char>(code);
+				file.get(code);
+				color.G = static_cast<unsigned char>(code);
+				file.get(code);
+				color.B = static_cast<unsigned char>(code);
 				SetPixel(bitmap, i, j, color);
 			}
 		}
@@ -242,9 +248,9 @@ int FaceDetect(Bitmap &bmp)
 {
 	Images* face = NULL;
 	Images* noface = NULL;
-	//SaveClassifier("train/FACES/YELLOW/train001.bmp", "train1.im");
+	SaveClassifier("train/FACES/YELLOW/train001.bmp", "train1.im");
 	LoadClassifier(face, "train1.im");
-	//SaveClassifier("train/NOFACES/train001.bmp", "train2.im");
+	SaveClassifier("train/NOFACES/train001.bmp", "train2.im");
 	LoadClassifier(noface, "train2.im");
 	BrowseImage(bmp, face, noface);
 	return 1;

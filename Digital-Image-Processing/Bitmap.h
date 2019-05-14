@@ -16,7 +16,11 @@ struct Bitmap
 
 struct Color
 {
-	char R, G, B;
+	unsigned char R, G, B;
+};
+
+struct Toado {
+	int x, y;
 };
 
 int LoadBitmap(const char *fname, Bitmap &bmp);
@@ -31,5 +35,5 @@ void reverse_image(const Bitmap &bmp,int k);
 void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 int FaceDetect(Bitmap &bmp);
-
+void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc);
 #endif
