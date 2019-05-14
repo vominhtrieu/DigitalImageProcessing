@@ -179,21 +179,21 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
 		}
 }
-void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
+void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, double sigma)
 {
-	int i, j,h,w;
-	double gauss[10][10], pi=3.14159,sigma=20.0,sum=0;
+	int i, j,h,w, gx=10,gy=10;
+	double gauss[10][10], pi=3.14159,sum=0;
 	Color color, color1, color2;
 	
 	//Gaussian
-	for(i=0;i<10;i++)
-		for (j = 0; j < 10; j++)
+	for(i=0;i<gx;i++)
+		for (j = 0; j < gy; j++)
 		{
 			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
 			sum += gauss[i][j];
 		}
-	for (i = 0; i < 10; i++) {
-		for (j = 0; j < 10; j++) {
+	for (i = 0; i < gx; i++) {
+		for (j = 0; j < gy; j++) {
 			gauss[i][j] /= sum;
 		}
 	}
@@ -207,8 +207,8 @@ void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
 				color2.B = 0;
 				color2.G = 0;
 				color2.R = 0;
-				for (h = i; h < i + 10; h++)
-					for (w = j; w < j + 10; w++) {
+				for (h = i; h < i + gx; h++)
+					for (w = j; w < j + gy; w++) {
 						
 						GetPixel(inbmp, h, w, color1);
 						

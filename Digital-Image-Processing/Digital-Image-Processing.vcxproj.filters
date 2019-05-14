@@ -43,5 +43,8 @@
     <Image Include="test.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="D:\THU.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

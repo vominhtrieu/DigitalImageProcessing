@@ -42,13 +42,19 @@ int main()
 				break;
 			case 4:
 				Toado tam;
-				float ax, b;
+				float ax, b,zigma;
 				
 				cout << "nhap toa do tam: "<<endl;
 				cin >> tam.x >> tam.y;
 				cout << "Nhap be ngang, doc cau elip: "<<endl;
 				cin >> ax; cin >> b;
-				BlurImage(bmp,tam,ax,b);
+
+				cout << "Nhap muc do lam nhoe anh (1-10): ";
+				cin >> zigma;
+				zigma*= 5;
+			
+				BlurImage(bmp, tam, ax, b, zigma);
+
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))
