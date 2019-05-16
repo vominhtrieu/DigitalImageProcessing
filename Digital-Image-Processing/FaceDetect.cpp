@@ -138,9 +138,9 @@ void BrowseImage(Bitmap bmp, Images* face, Images* noface)
 	cout << "       ";
 	for (int i = 0; i < bmp.height - 28; i++)
 	{
+		printf("\b\b\b\b\b\b%3.2f%%", i*100.0 / (bmp.height - 29));
 		for (int j = 0; j < bmp.width - 28; j++)
 		{
-			printf("\b\b\b\b\b\b%3.2f%%", (i*(bmp.width - 29) + j)*100.0 / ((bmp.width - 29)*(bmp.height - 29)));
 			image = GetImage(bmp, i, j);
 			if (Classifier(image, noface, threshold2, similarThreshold2, 0) == -1)
 			{
@@ -162,8 +162,8 @@ void BrowseImage(Bitmap bmp, Images* face, Images* noface)
 	}
 	int width = maxPos.X - minPos.X + 28;
 	int height = maxPos.Y - minPos.Y + 28;
-	//DrawRect(bmp, minPos.Y, minPos.X, height, width);
-	BlurImage(bmp, { (maxPos.X + minPos.X) / 2, (maxPos.Y + minPos.Y) / 2}, width, height);
+	//DrawRect(bmp, minPos.Y, minPos.X, height/2, width/2);
+	BlurImage(bmp, { (maxPos.X + minPos.X) / 2, (maxPos.Y + minPos.Y) / 2}, width/2, height/2);
 }
 
 void SaveClassifier(const char* firstImage, const char* fileName)

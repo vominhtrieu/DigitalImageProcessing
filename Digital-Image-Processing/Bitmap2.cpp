@@ -1,6 +1,23 @@
 #include "Bitmap.h"
 #include <math.h>
 
+Color operator + (Color color1, Color color2)
+{
+	Color color;
+	color.R = (color1.R + color2.R) > 255 ? 255 : (color1.R + color2.R);
+	color.G = (color1.G + color2.G) > 255 ? 255 : (color1.G + color2.G);
+	color.B = (color1.B + color2.B) > 255 ? 255 : (color1.B + color2.B);
+	return color;
+}
+
+Color operator / (Color color, int n)
+{
+	color.R /= n;
+	color.G /= n;
+	color.B /= n;
+	return color;
+}
+
 // O(1)
 int SetPixel(const Bitmap &bmp, int row, int col, Color color)
 {
@@ -179,6 +196,27 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
 		}
 }
+
+void MixImage(const Bitmap& bmp1, const Bitmap& bmp2)
+{
+	if (bmp1.height != bmp2.height || bmp1.width != bmp2.width)
+	{
+		cout << "2 images have different size!\n";
+		return;
+	}
+	for (int i = 0; i < bmp1.height; i++)
+	{
+		for (int j = 0; j < bmp1.width; j++)
+		{
+			Color color1, color2;
+			GetPixel(bmp1, i, j, color1);
+			GetPixel(bmp2, i, j, color2);
+			SetPixel(bmp1, i, j, (color1 + color2) / 2);
+		}
+	}
+	AdjustBrightness(bmp1, 1.5);
+}
+
 void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
 {
 	int i, j, h, w;

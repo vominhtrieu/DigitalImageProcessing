@@ -36,4 +36,5 @@ void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 int FaceDetect(Bitmap &bmp);
 void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc);
+void MixImage(const Bitmap& bmp1, const Bitmap& bmp2);
 #endif
