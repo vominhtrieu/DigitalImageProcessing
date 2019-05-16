@@ -7,7 +7,7 @@ int main()
 {
 	char *inFileName = (char*)malloc(100*sizeof(char));
 	const char *outFileName= "out.bmp";
-	Bitmap bmp;
+	Bitmap bmp,out;
 	printf("Enter file path:");
 	scanf("%s", inFileName);
 	int option;
@@ -17,25 +17,21 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Reverse.\n4Rotate.");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n");
 			scanf("%d", &option);
 			switch (option)
 			{
 			case 1:
-				
 				BlackWhite(bmp);
 				break;
 			case 2:
 				AdjustBrightness(bmp, 2);
 				break;
 			case 3:
-				int k;
-				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
-				scanf("%d", &k);
-				reverse_image(bmp,k);
+				Rotate(bmp);
 				break;
 			case 4:
-				Rotate(bmp);
+				ConverttoPencilsketch(bmp);
 				break;
 			default:
 				printf("Wrong command!");
@@ -56,7 +52,7 @@ int main()
 				system("clear");
 			#endif
 		}
-		DisposeBitmap(bmp);
+		DisposeBitmap(out);
 	}
 	else
 		printf("Can not load the bitmap file!!!\n");
