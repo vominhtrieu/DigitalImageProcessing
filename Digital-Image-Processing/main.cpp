@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Rotate.\n4.Pencil.\n");
 			scanf("%d", &option);
 			switch (option)
 			{

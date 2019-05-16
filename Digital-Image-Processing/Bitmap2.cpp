@@ -223,10 +223,17 @@ void ConverttoPencilsketch(Bitmap &bmp)
 	Bitmap temp;
 	BlackWhite(bmp);
 	//
-	temp.width = bmp.height;
-	temp.height = bmp.width;
+	temp.width = bmp.width;
+	temp.height = bmp.height;
 	temp.rowSize = ((3 * bmp.width + 3) / 4) * 4;
 	temp.pixels = new unsigned char[bmp.rowSize * bmp.height];
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			SetPixel(temp, row, col, color);
+		}
 	//Create negative photo
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
@@ -240,22 +247,16 @@ void ConverttoPencilsketch(Bitmap &bmp)
 		}
 
 	//Blur
-	BlurImageforpencilsketch(bmp, 15.0);
+	BlurImageforpencilsketch(bmp, 5.0);
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
 			Color color2,color3;
 			GetPixel(bmp, row, col, color2);
 			GetPixel(temp, row, col, color3);
-			color2.B = color3.B * 255 / (255 - color2.B);
-			color2.G = color3.G * 255 / (255 - color2.G);
-			color2.R = color3.R * 255 / (255 - color2.R);
-			if (color2.G > 255) color2.G = 255;
-			if (color2.R > 255) color2.R = 255;
-			if (color2.B > 255) color2.B = 255;
+			color2.B = ((int)color3.B * 255 / (255 - (int)color2.B))>255?255: (int)color3.B * 255 / (255 - (int)color2.B);
+			color2.G = ((int)color3.G * 255 / (255 - (int)color2.G)) > 255 ? 255 : (int)color3.G * 255 / (255 - (int)color2.G);
+			color2.R = ((int)color3.R * 255 / (255 - (int)color2.R)) > 255 ? 255 : (int)color3.R * 255 / (255 - (int)color2.R);
 			SetPixel(bmp, row, col, color2);
 		}
-
-
-
 }
