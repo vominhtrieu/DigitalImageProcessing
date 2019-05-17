@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Rotate.\n4.Pencil.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.Rotate.\n4.Pencil.\n5.Resize.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -32,6 +32,12 @@ int main()
 				break;
 			case 4:
 				ConverttoPencilsketch(bmp);
+				break;
+			case 5:
+				int w, h;
+				printf("Enter new width and height:");
+				scanf("%d%d", &w, &h);
+				Resize(bmp, w, h);
 				break;
 			default:
 				printf("Wrong command!");

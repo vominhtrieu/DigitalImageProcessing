@@ -27,5 +27,6 @@ void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 void Rotate(Bitmap &inbmp);
 void ConverttoPencilsketch(Bitmap &bmp);
+void Resize(Bitmap& inbmp, int width, int height);
 
 #endif

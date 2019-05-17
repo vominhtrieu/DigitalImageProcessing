@@ -131,22 +131,63 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 		}
 }
 
-void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
+void Resize(Bitmap& inbmp, int width, int height)
 {
+	double sx1, sx2, sy1, sy2, dx, dy;
+	unsigned char desR, desG, desB;
+	Bitmap outbmp;
 	outbmp.width = width;
 	outbmp.height = height;
 	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
 	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
-	for (int row = 0; row < inbmp.height; row++)
-		for (int col = 0; col < inbmp.width; col++)
+	double fx = inbmp.width*1.0 / width;
+	double fy = inbmp.height*1.0 / height;
+	for (int y = 0; y < height; y++)
+	{
+		sy1 = fy * y;
+		sy2 = sy1 + fy;
+		for (int x = 0; x < width; x++)
 		{
-			Color color;
-			GetPixel(inbmp, row, col, color);
-			SetPixel(outbmp, 2 * row, 2 * col, color);
-			SetPixel(outbmp, 2 * row, 2 * col + 1, color);
-			SetPixel(outbmp, 2 * row + 1, 2 * col, color);
-			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
+			sx1 = fx * x;
+			sx2 = sx1 + fx;
+			desR = desG = desB = 0;
+			for (int i = floor(sy1); i < ceil(sy2); i++)
+			{
+				dy = 1;
+				if (sy1 > i)
+				{
+					dy -= sy1 - i;
+				}
+				if (sy2 < i + 1)
+				{
+					dy -= (i + 1 - sy2);
+				}
+				for (int j = floor(sx1); j < ceil(sx2); j++)
+				{
+					dx = 1;
+					if (sx1 > j)
+					{
+						dx -= sx1 - j;
+					}
+					if (sx2 < j + 1)
+					{
+						dx -= (j + 1 - sx2);
+					}
+					Color color;
+					GetPixel(inbmp, i, j, color);
+					double PC = dx * dy*(1.0 / (fx))*(1.0 / (fy));
+					desR += color.R*PC;
+					desG += color.G*PC;
+					desB += color.B*PC;
+				}
+			}
+			SetPixel(outbmp, y, x, { desR,desG,desB });
 		}
+	}
+	inbmp.width = outbmp.width;
+	inbmp.height = outbmp.height;
+	inbmp.rowSize = outbmp.rowSize;
+	inbmp.pixels = outbmp.pixels;
 }
 
 void Rotate(Bitmap &inbmp)
@@ -219,7 +260,7 @@ void BlurImageforpencilsketch(const Bitmap &inbmp, double sigma)
 }
 
 void ConverttoPencilsketch(Bitmap &bmp)
-{	
+{
 	Bitmap temp;
 	BlackWhite(bmp);
 	//
@@ -240,9 +281,9 @@ void ConverttoPencilsketch(Bitmap &bmp)
 		{
 			Color color;
 			GetPixel(bmp, row, col, color);
-			color.B = 255- color.B;
-			color.R = 255- color.R;
-			color.G = 255- color.G;
+			color.B = 255 - color.B;
+			color.R = 255 - color.R;
+			color.G = 255 - color.G;
 			SetPixel(bmp, row, col, color);
 		}
 
@@ -251,10 +292,10 @@ void ConverttoPencilsketch(Bitmap &bmp)
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
-			Color color2,color3;
+			Color color2, color3;
 			GetPixel(bmp, row, col, color2);
 			GetPixel(temp, row, col, color3);
-			color2.B = ((int)color3.B * 255 / (255 - (int)color2.B))>255?255: (int)color3.B * 255 / (255 - (int)color2.B);
+			color2.B = ((int)color3.B * 255 / (255 - (int)color2.B)) > 255 ? 255 : (int)color3.B * 255 / (255 - (int)color2.B);
 			color2.G = ((int)color3.G * 255 / (255 - (int)color2.G)) > 255 ? 255 : (int)color3.G * 255 / (255 - (int)color2.G);
 			color2.R = ((int)color3.R * 255 / (255 - (int)color2.R)) > 255 ? 255 : (int)color3.R * 255 / (255 - (int)color2.R);
 			SetPixel(bmp, row, col, color2);
