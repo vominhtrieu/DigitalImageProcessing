@@ -134,7 +134,7 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 void Resize(Bitmap& inbmp, int width, int height)
 {
 	double sx1, sx2, sy1, sy2, dx, dy;
-	unsigned char desR, desG, desB;
+	double desR, desG, desB;
 	Bitmap outbmp;
 	outbmp.width = width;
 	outbmp.height = height;
@@ -181,7 +181,7 @@ void Resize(Bitmap& inbmp, int width, int height)
 					desB += color.B*PC;
 				}
 			}
-			SetPixel(outbmp, y, x, { desR,desG,desB });
+			SetPixel(outbmp, y, x, { (unsigned char)desR,(unsigned char)desG,(unsigned char)desB });
 		}
 	}
 	inbmp.width = outbmp.width;
