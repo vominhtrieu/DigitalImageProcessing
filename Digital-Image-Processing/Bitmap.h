@@ -29,6 +29,7 @@ void AdjustBrightness(const Bitmap &bmp, double factor);
 double Truncate(double R);
 double max(double a, double b);
 void AutoContrastAdjustment(const Bitmap &bmp);
+void FilterSummer(const Bitmap &bmp, int percent);
 void ContrastAdjustment(const Bitmap &bmp, int C);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 

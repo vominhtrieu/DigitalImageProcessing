@@ -43,6 +43,12 @@ int main()
 			case 5:
 				Negative(bmp);
 				break;
+			case 6:
+				int percent;
+				printf("Gia tri can chinh:");
+				scanf("%d", &percent);
+				FilterSummer(bmp, percent);
+				break;
 			default:
 				printf("Wrong command!");
 				break;

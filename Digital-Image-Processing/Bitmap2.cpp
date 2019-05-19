@@ -80,6 +80,8 @@ void Negative(const Bitmap& bmp)
 			color.R = 255-color.R;
 			color.G = 255-color.G;
 			color.B = 255-color.B;
+			
+			
 			SetPixel(bmp, row, col, color);
 		}
 }
@@ -125,12 +127,19 @@ double Truncate(double R)
 	if (R > 255) return 255;
 	return R;
 }
-double max(double a, double b)
+void FilterSummer(const Bitmap &bmp,int percent)
 {
-	if (a > b)
-		return a;
-	else
-		return b;
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			
+			color.B = color.R*(100 - percent) / 100;
+			if (color.B > 255)
+				color.B = 255;
+			SetPixel(bmp, row, col, color);
+		}
 }
 
 /*void AutoContrastAdjustment(const Bitmap &bmp)
@@ -177,7 +186,6 @@ void ContrastAdjustment(const Bitmap &bmp, int C)
 			g = (C * (color.G - 128)/100 + 128);
 			b = (C * (color.B - 128)/100 + 128);
 			color.R = Truncate(r); color.G = Truncate(g); color.B = Truncate(b);
-
 			SetPixel(bmp, row, col, color);
 		}
 }
