@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n5.FilterWinter.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -51,10 +51,17 @@ int main()
 
 				cout << "Nhap muc do lam nhoe anh (1-10): ";
 				cin >> zigma;
-				zigma*= 5;
+				zigma*= 2.5;
 			
 				BlurImage(bmp, tam, ax, b, zigma);
 
+				break;
+			case 5:
+				float percent;
+				cout << "Nhap muc do ban muon: (0% - 100%): ";
+				cin >> percent;
+				percent = (100 - percent) / 100;
+				FilterWinter(bmp, percent, 0.9);
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))

@@ -30,5 +30,6 @@ void reverse_image(const Bitmap &bmp,int k);
 void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, double sigma);
+void FilterWinter(Bitmap &bmp, float percent1, float percent2);
 
 #endif

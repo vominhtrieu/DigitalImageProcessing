@@ -158,7 +158,7 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 				color.B = color.B*k;
 				color.G = color.G*k;
 			}
-			SetPixel(bmp, row, col, color);
+SetPixel(bmp, row, col, color);
 		}
 }
 
@@ -181,44 +181,106 @@ void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
 }
 void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, double sigma)
 {
-	int i, j,h,w, gx=10,gy=10;
-	double gauss[10][10], pi=3.14159,sum=0;
+	int i, j, h, w, gx = 10, gy = 10, x;
+
 	Color color, color1, color2;
+	const int k = sigma / 2.5;
+	float d=10, doc1, ngang1;
+	double gauss[10][10][10], pi = 3.14159, sum[20];
+	for (x = 0; x < 20; x++) sum[x] = 0;
 	
 	//Gaussian
-	for(i=0;i<gx;i++)
-		for (j = 0; j < gy; j++)
-		{
-			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
-			sum += gauss[i][j];
-		}
-	for (i = 0; i < gx; i++) {
-		for (j = 0; j < gy; j++) {
-			gauss[i][j] /= sum;
-		}
-	}
-
-	//Blured Image
-	for (i = 0; i < inbmp.height; i++) 
-		for (j = 0; j < inbmp.width; j++) {
-			if (((i - TamElip.y)*(i - TamElip.y) / (doc*doc)) + ((j - TamElip.x)*(j - TamElip.x) / (ngang*ngang)) > 1)
+	sigma = 0.5;
+	for (x = 0; x < k; x++)
+	{
+		for (i = 0; i < gx; i++)
+			for (j = 0; j < gy; j++)
 			{
-				GetPixel(inbmp, i, j, color);
-				color2.B = 0;
-				color2.G = 0;
-				color2.R = 0;
-				for (h = i; h < i + gx; h++)
-					for (w = j; w < j + gy; w++) {
-						
-						GetPixel(inbmp, h, w, color1);
-						
-						color2.B += gauss[h - i][w - j] * color1.B;
-						color2.R += gauss[h - i][w - j] * color1.R;
-						color2.G += gauss[h - i][w - j] * color1.G;
-					}
-				
-				SetPixel(inbmp, i, j, color2);
+				gauss[x][i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+				sum[x] += gauss[x][i][j];
+			}
+		sigma += 1;
+	}
+	for (x = 0; x < k; x++)
+		for (i = 0; i < gx; i++) {
+			for (j = 0; j < gy; j++) {
+				gauss[x][i][j] /= sum[x];
 			}
 		}
 	
+	
+	//Blured Image
+
+	for (i = 0; i < inbmp.height; i++)
+		for (j = 0; j < inbmp.width; j++)
+		{
+			doc1 = doc; ngang1 = ngang;
+			for (x = 0; x < k; x++)
+			{
+
+				if ((i - TamElip.y)*(i - TamElip.y) / ((doc + k*d)*(doc + k*d)) +
+					((j - TamElip.x)*(j - TamElip.x) / ((ngang + d*k)*(ngang + d*k))) > 1)
+						{
+							color2.B = 0;
+							color2.G = 0;
+							color2.R = 0;
+							for (h = i; h < i + gx; h++)
+								for (w = j; w < j + gy; w++)
+								{
+
+									GetPixel(inbmp, h, w, color1);
+
+									color2.B += gauss[k-1][h - i][w - j] * color1.B;
+									color2.R += gauss[k-1][h - i][w - j] * color1.R;
+									color2.G += gauss[k-1][h - i][w - j] * color1.G;
+								}
+
+
+							SetPixel(inbmp, i, j, color2);
+						}
+				else
+
+					if ((((i - TamElip.y)*(i - TamElip.y) / (doc1*doc1)) +
+						((j - TamElip.x)*(j - TamElip.x) / (ngang1*ngang1)) > 1)
+						&& ( ((i - TamElip.y)*(i - TamElip.y) / ((doc1 + d)*(doc1 + d)) ) +
+						((j - TamElip.x)*(j - TamElip.x) / ((ngang1 + d)*(ngang1 + d)) ) < 1))
+					{
+
+						color2.B = 0;
+						color2.G = 0;
+						color2.R = 0;
+						for (h = i; h < i + gx; h++)
+							for (w = j; w < j + gy; w++)
+							{
+
+								GetPixel(inbmp, h, w, color1);
+
+								color2.B += gauss[x][h - i][w - j] * color1.B;
+								color2.R += gauss[x][h - i][w - j] * color1.R;
+								color2.G += gauss[x][h - i][w - j] * color1.G;
+							}
+						
+
+						SetPixel(inbmp, i, j, color2);
+						break;
+					}
+					doc1 += d;
+					ngang1 += d;
+				}
+
+			}
+}
+void FilterWinter(Bitmap &bmp, float pt1, float pt2)
+{
+	Color color;
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			GetPixel(bmp, row, col, color);
+			color.R = (color.R * (pt1));
+			
+			color.G = (color.G * (pt2));
+			
+			SetPixel(bmp, row, col, color);
+		}
 }
