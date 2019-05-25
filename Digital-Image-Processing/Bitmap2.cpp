@@ -1,6 +1,6 @@
 #include "Bitmap.h"
 #include <math.h>
-
+#include <malloc.h>
 // O(1)
 int SetPixel(const Bitmap &bmp, int row, int col, Color color)
 {
@@ -179,4 +179,193 @@ void zoomimage(const Bitmap &inbmp, Bitmap &outbmp, int k)
 
 			SetPixel(inbmp, row, col, color3);
 		}
+}
+
+
+void Cut_image(Bitmap &inbmp, int x, int y, int X, int Y)
+{
+	if (X > inbmp.width || Y > inbmp.height)
+	{
+		//printf("ERORR");
+		return;
+	}
+	Bitmap outbmp;
+	outbmp.width = X - x;
+	outbmp.height = Y - y;
+	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
+	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
+
+
+	for (int col = 0; col < outbmp.width; col++)
+		for (int row = 0; row < outbmp.height; row++)
+		{
+			Color color3;
+			GetPixel(inbmp, row + y, col + x, color3);
+			SetPixel(outbmp, row, col, color3);
+		}
+
+	inbmp.width = outbmp.width;
+	inbmp.height = outbmp.height;
+	inbmp.pixels = outbmp.pixels;
+	inbmp.rowSize = outbmp.rowSize;
+}
+
+
+
+
+
+
+
+
+
+
+
+void Balance_Histogram(const Bitmap &bmp, int new_level)
+{
+
+	int *Array = Array_convert_color(bmp, new_level);
+
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			color.R = Convert_color(Array, color.R);
+			color.B = color.R;
+			color.G = color.R;
+			SetPixel(bmp, row, col, color);
+		}
+}
+
+void Bunch_image(const Bitmap &bmp, int new_level)
+{
+	Balance_Histogram(bmp);
+	//int *Array = Array_convert_color(bmp, new_level);
+
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color;
+			GetPixel(bmp, row, col, color);
+			color.R = (color.R / new_level) *new_level;
+			color.B = (color.B / new_level) *new_level;
+			color.G = (color.G / new_level) *new_level;
+			SetPixel(bmp, row, col, color);
+		}
+}
+
+
+
+
+
+int* Array_convert_color(Bitmap bmp, int new_level)
+{
+	int *a = (int *)calloc(256, sizeof(int));
+
+	for (int i = 0; i < 256; i++)
+		for (int col = 0; col <= bmp.width; col++)
+			for (int row = 0; row <= bmp.height; row++)
+			{
+				Color color;
+				GetPixel(bmp, row, col, color);
+				if (color.R == i)
+					a[i]++;
+			}
+	int S = 0;
+	for (int i = 0; i < 255; i++)
+	{
+		S += a[i];
+		a[i] = S;
+	}
+
+	int TB = (bmp.height*bmp.width) / new_level;
+
+	for (int i = 0; i < 256; i++)
+	{
+		a[i] = int(round(float(a[i] / TB)) - 1);
+		if (a[i] > 255)
+			a[i] = 255;
+		else if (a[i] < 0)
+			a[i] = 0;
+
+	}
+	return a;
+}
+
+unsigned char Convert_color(int *a, unsigned char A)
+{
+	for (int i = 0; i < 256; i++)
+		if (A == i)
+			return  a[i];
+}
+
+
+void Picture_frames(Bitmap &bmp, int thickness, unsigned char COLOR)
+{
+	Bitmap outbmp;
+	outbmp.width = bmp.width + thickness * 2;
+	outbmp.height = bmp.height + thickness * 2;
+	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
+	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
+
+	for (int row = 0; row < outbmp.height; row++)
+		for (int col = 0; col < outbmp.width; col++)
+			SetPixel(outbmp, row, col, { COLOR,COLOR,COLOR });
+
+
+
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color1;
+			GetPixel(bmp, row, col, color1);
+			SetPixel(outbmp, row + thickness, col + thickness, color1);
+		}
+	bmp.width = outbmp.width;
+	bmp.height = outbmp.height;
+	bmp.pixels = outbmp.pixels;
+	bmp.rowSize = outbmp.rowSize;
+	if (thickness == 15)
+		return;
+	Picture_frames(bmp, 15, 0);
+}
+
+
+
+void Find_boundary(Bitmap &bmp, double boundary, int R)
+{
+	BlackWhite(bmp);
+	Bitmap outbmp;
+	outbmp.width = bmp.width;
+	outbmp.height = bmp.height;
+	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
+	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
+	Color color1, color2;
+
+	for (int row = 0; row < outbmp.height; row++)
+		for (int col = 0; col < outbmp.width; col++)
+			SetPixel(outbmp, row, col, { 255,255,255 });
+
+
+	for (int row = R; row < bmp.height - R; row++)
+		for (int col = R; col < bmp.width - R; col++)
+		{
+			int tong = 0;
+
+			for (int i = row - R; i <= row + R; i++)
+				for (int j = col - R; j <= col + R; j++)
+				{
+					GetPixel(bmp, i, j, color2);
+					tong += color2.R;
+				}
+			GetPixel(bmp, row, col, color1);
+			if (tong > (2 * R + 1) * (2 * R + 1) * color1.R + boundary)
+			{
+				SetPixel(outbmp, row, col, { 0,0,0 });
+			}
+		}
+	bmp.width = outbmp.width;
+	bmp.height = outbmp.height;
+	bmp.pixels = outbmp.pixels;
+	bmp.rowSize = outbmp.rowSize;
 }
