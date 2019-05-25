@@ -222,7 +222,7 @@ void Cut_image(Bitmap &inbmp, int x, int y, int X, int Y)
 
 void Balance_Histogram(const Bitmap &bmp, int new_level)
 {
-
+        BlackWhite(bmp);
 	int *Array = Array_convert_color(bmp, new_level);
 
 	for (int row = 0; row < bmp.height; row++)
@@ -239,8 +239,7 @@ void Balance_Histogram(const Bitmap &bmp, int new_level)
 
 void Bunch_image(const Bitmap &bmp, int new_level)
 {
-	Balance_Histogram(bmp);
-	//int *Array = Array_convert_color(bmp, new_level);
+	
 
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
