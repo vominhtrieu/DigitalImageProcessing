@@ -24,13 +24,19 @@ int GetPixel(const Bitmap &bmp, int row, int col, Color &color);
 
 void BlackWhite(const Bitmap& bmp);
 void Negative(const Bitmap& bmp);
-void reverse_image(const Bitmap &bmp,int k);
+void Flip(const Bitmap &bmp,int k);
 void AdjustBrightness(const Bitmap &bmp, double factor);
 double Truncate(double R);
-double max(double a, double b);
+bool check(int row, int col, const Bitmap bmp);
 void AutoContrastAdjustment(const Bitmap &bmp);
 void FilterSummer(const Bitmap &bmp, int percent);
 void ContrastAdjustment(const Bitmap &bmp, int C);
+void BlurImageforpencilsketch(const Bitmap &inbmp, double sigma);
+void Sharpen(const Bitmap &inbmp, int k);
+void Quantization(const Bitmap &bmp, int k);
+void Ripple(const Bitmap &bmp);
+void Twirl(const Bitmap &bmp);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
+
 
 #endif

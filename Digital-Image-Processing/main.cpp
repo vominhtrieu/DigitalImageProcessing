@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Contrast.\n5.Negative.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Contrast.\n5.Negative.\n6.FilterSummer.\n7.Sharpen\n8.Quantization.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -26,13 +26,13 @@ int main()
 				BlackWhite(bmp);
 				break;
 			case 2:
-				AdjustBrightness(bmp, 2);
+				AdjustBrightness(bmp, 5);
 				break;
 			case 3:
 				int k;
 				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
 				scanf("%d", &k);
-				reverse_image(bmp,k);
+				Flip(bmp,k);
 				break;
 			case 4:
 				int C;
@@ -48,6 +48,18 @@ int main()
 				printf("Gia tri can chinh:");
 				scanf("%d", &percent);
 				FilterSummer(bmp, percent);
+				break;
+			case 7:
+				//int k;
+				//printf("Do sac net tu 0.2 den 0.7");
+				//scanf("%d", &k);*/
+				Sharpen(bmp, 1);
+				break;
+			case 8:
+				//int k;
+				//printf("Do sac net tu 0.2 den 0.7");
+				//scanf("%d", &k);*/
+				Sharpen(bmp, 8);
 				break;
 			default:
 				printf("Wrong command!");
