@@ -1,4 +1,4 @@
 ﻿  main.cpp
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\main.cpp(64): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\main.cpp(71): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\main.cpp(10): warning C4101: 'bmpout': unreferenced local variable
   Digital-Image-Processing.vcxproj -> C:\Users\Tuyet Trinh\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe

@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n5.FilterWinter.\n6.Sow Effect.\n7.Salt and Pepper Noise.\n8.Pastel.\n9.Rotate.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n5.FilterWinter.\n6.Sow Effect.\n7.Salt and Pepper Noise.\n8.Pastel.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -42,19 +42,26 @@ int main()
 				break;
 			case 4:
 				Toado tam;
-				float ax, b,zigma;
+				float ax, b,zigma, key;
 				
-				cout << "nhap toa do tam: "<<endl;
-				cin >> tam.x >> tam.y;
-				cout << "Nhap be ngang, doc cau elip: "<<endl;
-				cin >> ax; cin >> b;
-
 				cout << "Nhap muc do lam nhoe anh (1-10): ";
 				cin >> zigma;
-				zigma*= 2.5;
-			
-				BlurImage(bmp, tam, ax, b, zigma);
+				zigma *= 2.5;
+				cout << "Nhap 1 neu ban muon lam nhoe toan anh.\nNhap 0 neu ban muon lam mo 1 phan anh.\n";
+				cin >> key;
+				if (key == 1)
+				{
+					BlurImage(bmp, { 0,0 }, -1, -1, zigma);
+				}
+				else
+				{
+					cout << "nhap toa do tam: " << endl;
+					cin >> tam.x >> tam.y;
+					cout << "Nhap be ngang, doc cau elip: " << endl;
+					cin >> ax; cin >> b;
 
+					BlurImage(bmp, tam, ax, b, zigma);
+				}
 				break;
 			case 5:
 				float percent;
@@ -71,9 +78,6 @@ int main()
 				break;
 			case 8:
 				Pastel(bmp);
-				break;
-			case 9:
-				Rotate(bmp, 100);
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))

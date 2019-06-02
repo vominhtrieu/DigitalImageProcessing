@@ -34,6 +34,5 @@ void FilterWinter(Bitmap &bmp, float percent1, float percent2);
 void SnowEffect(Bitmap &bmp);
 void SaltPepperNoise(Bitmap &bmp);
 void Pastel(Bitmap &bmp);
-void Rotate(Bitmap bmp, float degree);
 
 #endif
