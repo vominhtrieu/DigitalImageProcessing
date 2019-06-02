@@ -1,0 +1,15 @@
+﻿  Bitmap2.cpp
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(62): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(64): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(188): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(203): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(208): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(213): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(251): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(252): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(253): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(399): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(416): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(440): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(30): warning C4715: 'GetPixel': not all control paths return a value
+  Digital-Image-Processing.vcxproj -> C:\Users\COMPUTER\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe

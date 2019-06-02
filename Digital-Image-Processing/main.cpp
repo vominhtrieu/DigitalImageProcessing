@@ -53,14 +53,16 @@ int main()
 				//int k;
 				//printf("Do sac net tu 0.2 den 0.7");
 				//scanf("%d", &k);*/
-				Sharpen(bmp, 1);
+				Sharpen(bmp,5);
 				break;
 			case 8:
 				//int k;
 				//printf("Do sac net tu 0.2 den 0.7");
 				//scanf("%d", &k);*/
-				Sharpen(bmp, 8);
+				Quantization(bmp, 4);
 				break;
+			case 9:
+				Ripple(bmp);
 			default:
 				printf("Wrong command!");
 				break;

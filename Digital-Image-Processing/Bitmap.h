@@ -31,11 +31,12 @@ bool check(int row, int col, const Bitmap bmp);
 void AutoContrastAdjustment(const Bitmap &bmp);
 void FilterSummer(const Bitmap &bmp, int percent);
 void ContrastAdjustment(const Bitmap &bmp, int C);
-void BlurImageforpencilsketch(const Bitmap &inbmp, double sigma);
-void Sharpen(const Bitmap &inbmp, int k);
+
+void Sharpen(const Bitmap &inbmp, double k);
 void Quantization(const Bitmap &bmp, int k);
 void Ripple(const Bitmap &bmp);
 void Twirl(const Bitmap &bmp);
+void OilPainting(const Bitmap &bmp, int L);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 
 

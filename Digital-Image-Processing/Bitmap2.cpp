@@ -266,7 +266,7 @@ bool check(int row, int col, const Bitmap bmp)
 	return true;
 }
 
-void Sharpen(const Bitmap &inbmp, int k)
+/*void Sharpen(const Bitmap &inbmp, int k)
 {
 	//BlurImageforpencilsketch(inbmp, 5.0);
 	//Negative(inbmp);
@@ -363,6 +363,42 @@ void Sharpen(const Bitmap &inbmp, int k)
 
 			SetPixel(inbmp, row, col, color);
 		}*/
+//}
+
+void Sharpen(const Bitmap &inbmp, double k)
+{
+	int x[8] = { -1,-1,-1,0,0,1,1,1 };
+	int y[8] = { -1,0,1,-1,1,-1,0,1 };
+	Bitmap bmp;
+	for (int row = 0; row < inbmp.height; row++)
+		for (int col = 0; col < inbmp.width; col++)
+		{
+			Color color, color1, color2;
+			int size = 1;
+			GetPixel(inbmp, row, col, color);
+			double B, R, G;
+			R = color.R; G = color.G; B = color.B;
+			for (int i = 0; i < 8; i++)
+			{
+				int xM, yM;
+				xM = row + x[i];
+				yM = row + y[i];
+				if (xM >= 0 && yM >= 0 && xM < inbmp.height && yM < inbmp.width)
+				{
+					GetPixel(inbmp, xM, yM, color1);
+					R += color1.R;
+					G += color1.G;
+					B += color1.B;
+					size++;
+				}
+			}
+			R = color.R + k * (color.R - R / size);
+			G = color.G + k * (color.G - G / size);
+			B = color.B + k * (color.B - B / size);
+			//R = R / size; G = G / size; B = B / size;
+			color2.R = Truncate(R); color2.B = Truncate(B); color2.G = Truncate(G);
+			SetPixel(bmp, row, col, color2);
+		}
 }
 
 void Quantization(const Bitmap &bmp, int k)
@@ -382,21 +418,42 @@ void Quantization(const Bitmap &bmp, int k)
 		}
 }
 
-/*void Resize(const Bitmap& inbmp, Bitmap& outbmp, int width, int height)
+
+
+void Ripple(const Bitmap &bmp)
 {
-	outbmp.width = width;
-	outbmp.height = height;
-	outbmp.rowSize = ((3 * outbmp.width + 3) / 4) * 4;
-	outbmp.pixels = new unsigned char[outbmp.rowSize * outbmp.height];
-	for (int row = 0; row < inbmp.height; row++)
-		for (int col = 0; col < inbmp.width; col++)
+	for (int row=0; row<bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+			//for (int c=0; c<3; c++)
+			{
+				Color color;
+				GetPixel(bmp, row, col, color);
+				/*double Rdouble = (color.R +  sin((color.R * 2 * 3.14) / 20));
+				double Gdouble = (color.G + sin((color.G * 2 * 3.14) / 20));
+				double Bdouble = (color.B +  sin((color.B * 2 * 3.14) / 20));
+				int temp1 = Rdouble, temp2 = Gdouble, temp3 = Bdouble;
+				/*double R, G, B;
+				R = (color.R + temp1) * 3 + c;
+				G = (color.G + temp2) * 3 + c;
+				B = (color.B + temp3) * 3 + c;*/
+			    double coldouble = (col + 5 * sin((row * 2 * 3.14) / 20));
+				int temp = coldouble;
+				/*int temp1 = (row*bmp.width + coldouble) * 3 + c;*/
+				color.R = color.R*temp; color.G = color.G*temp; color.B = color.B*temp;
+				SetPixel(bmp, row, col, color);
+			}
+
+}
+/*void Twirl(const Bitmap &bmp)
+{
+	for (int row=0; row<bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
 		{
-			Color color;
-			GetPixel(inbmp, row, col, color);
-			SetPixel(outbmp, 2 * row, 2 * col, color);
-			SetPixel(outbmp, 2 * row, 2 * col + 1, color);
-			SetPixel(outbmp, 2 * row + 1, 2 * col, color);
-			SetPixel(outbmp, 2 * row + 1, 2 * col + 1, color);
+			GetPixel(bmp,row)
 		}
 }*/
 
+void OilPainting(const Bitmap &bmp, int L)
+{
+
+}
