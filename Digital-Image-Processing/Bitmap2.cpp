@@ -182,11 +182,12 @@ void zoomimage(const Bitmap &inbmp, Bitmap &outbmp, int k)
 }
 
 
-void Cut_image(Bitmap &inbmp, int x, int y, int X, int Y)
+
+void CutImage(Bitmap &inbmp, int x, int y, int X, int Y)
 {
 	if (X > inbmp.width || Y > inbmp.height)
 	{
-		//printf("ERORR");
+		printf("ERORR");
 		return;
 	}
 	Bitmap outbmp;
@@ -211,53 +212,42 @@ void Cut_image(Bitmap &inbmp, int x, int y, int X, int Y)
 }
 
 
-
-
-
-
-
-
-
-
-
-void Balance_Histogram(const Bitmap &bmp, int new_level)
+void BunchImage(const Bitmap &bmp, int new_level)
 {
-        BlackWhite(bmp);
-	int *Array = Array_convert_color(bmp, new_level);
+
+	for (int row = 0; row < bmp.height-1; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color1, color2;
+			GetPixel(bmp, row, col, color1);
+			GetPixel(bmp, row + 1, col, color2);
+			
+			SetPixel(bmp, row, col, { (unsigned char)abs(color2.R-color1.R), (unsigned char)abs(color2.G - color1.G), (unsigned char)abs(color2.B - color1.B) });
+		}
+}
+
+
+void BalanceHistogram(const Bitmap &bmp)
+{
+	int new_level = 256;
+	BlackWhite(bmp);
+	int *Array = Arrayconvertcolor(bmp, new_level);
 
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
 			Color color;
 			GetPixel(bmp, row, col, color);
-			color.R = Convert_color(Array, color.R);
+			color.R = Convertcolor(Array, color.R);
 			color.B = color.R;
 			color.G = color.R;
 			SetPixel(bmp, row, col, color);
 		}
 }
 
-void Bunch_image(const Bitmap &bmp, int new_level)
-{
-	
-
-	for (int row = 0; row < bmp.height; row++)
-		for (int col = 0; col < bmp.width; col++)
-		{
-			Color color;
-			GetPixel(bmp, row, col, color);
-			color.R = (color.R / new_level) *new_level;
-			color.B = (color.B / new_level) *new_level;
-			color.G = (color.G / new_level) *new_level;
-			SetPixel(bmp, row, col, color);
-		}
-}
 
 
-
-
-
-int* Array_convert_color(Bitmap bmp, int new_level)
+int* Arrayconvertcolor(Bitmap bmp, int new_level)
 {
 	int *a = (int *)calloc(256, sizeof(int));
 
@@ -271,7 +261,7 @@ int* Array_convert_color(Bitmap bmp, int new_level)
 					a[i]++;
 			}
 	int S = 0;
-	for (int i = 0; i < 255; i++)
+	for (int i = 0; i < 256; i++)
 	{
 		S += a[i];
 		a[i] = S;
@@ -291,7 +281,7 @@ int* Array_convert_color(Bitmap bmp, int new_level)
 	return a;
 }
 
-unsigned char Convert_color(int *a, unsigned char A)
+unsigned char Convertcolor(int *a, unsigned char A)
 {
 	for (int i = 0; i < 256; i++)
 		if (A == i)
@@ -299,7 +289,7 @@ unsigned char Convert_color(int *a, unsigned char A)
 }
 
 
-void Picture_frames(Bitmap &bmp, int thickness, unsigned char COLOR)
+void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR)  
 {
 	Bitmap outbmp;
 	outbmp.width = bmp.width + thickness * 2;
@@ -310,8 +300,6 @@ void Picture_frames(Bitmap &bmp, int thickness, unsigned char COLOR)
 	for (int row = 0; row < outbmp.height; row++)
 		for (int col = 0; col < outbmp.width; col++)
 			SetPixel(outbmp, row, col, { COLOR,COLOR,COLOR });
-
-
 
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
@@ -331,8 +319,9 @@ void Picture_frames(Bitmap &bmp, int thickness, unsigned char COLOR)
 
 
 
-void Find_boundary(Bitmap &bmp, double boundary, int R)
+void FindBoundary(Bitmap &bmp, double boundary)//tạo ảnh tranh vẽ
 {
+	int R = 2;
 	BlackWhite(bmp);
 	Bitmap outbmp;
 	outbmp.width = bmp.width;
@@ -343,8 +332,8 @@ void Find_boundary(Bitmap &bmp, double boundary, int R)
 
 	for (int row = 0; row < outbmp.height; row++)
 		for (int col = 0; col < outbmp.width; col++)
-			SetPixel(outbmp, row, col, { 255,255,255 });
-
+			SetPixel(outbmp, row, col, { 255,255,255});
+		
 
 	for (int row = R; row < bmp.height - R; row++)
 		for (int col = R; col < bmp.width - R; col++)
@@ -360,7 +349,7 @@ void Find_boundary(Bitmap &bmp, double boundary, int R)
 			GetPixel(bmp, row, col, color1);
 			if (tong > (2 * R + 1) * (2 * R + 1) * color1.R + boundary)
 			{
-				SetPixel(outbmp, row, col, { 0,0,0 });
+				SetPixel(outbmp, row, col, { 0,0,0});
 			}
 		}
 	bmp.width = outbmp.width;
