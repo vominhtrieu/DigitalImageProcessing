@@ -145,7 +145,6 @@
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Advance.cpp" />
     <ClCompile Include="Bitmap1.cpp" />
     <ClCompile Include="Bitmap2.cpp" />
     <ClCompile Include="Color.cpp" />

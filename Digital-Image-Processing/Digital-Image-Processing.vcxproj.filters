@@ -32,9 +32,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Advance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
