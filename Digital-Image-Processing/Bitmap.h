@@ -27,13 +27,14 @@ void reverse_image(const Bitmap &bmp,int k);
 void AdjustBrightness(const Bitmap &bmp, double factor);
 void Enlarge(const Bitmap &inbmp, Bitmap &outbmp);
 void zoomimage(const Bitmap &inbmp, Bitmap &outbmp, int k);
-void Cut_image(Bitmap &inbmp, int x, int y, int X, int Y);
-void Balance_Histogram(const Bitmap &bmp, int new_level = 255);
-void Bunch_image(const Bitmap &bmp, int new_level);
-int* Array_convert_color(Bitmap bmp, int new_level);
-unsigned char Convert_color(int *a, unsigned char A);
-void Picture_frames(Bitmap &bmp, int thickness = 5, unsigned char COLOR = 255);
-void Find_boundary(Bitmap &bmp, double boundary, int R = 2);
+
+void CutImage(Bitmap &inbmp, int x, int y, int X, int Y);
+void BalanceHistogram(const Bitmap &bmp);
+int* Arrayconvertcolor(Bitmap bmp, int new_level);
+unsigned char Convertcolor(int *a, unsigned char A);
+void BunchImage(const Bitmap &bmp, int new_level);
+void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR);
+void FindBoundary(Bitmap &bmp, double boundary);
 
 
 #endif
