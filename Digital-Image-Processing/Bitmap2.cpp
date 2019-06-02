@@ -314,7 +314,7 @@ void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR)
 	bmp.rowSize = outbmp.rowSize;
 	if (thickness == 15)
 		return;
-	Picture_frames(bmp, 15, 0);
+	PictureFrames(bmp, 15, 0);
 }
 
 
