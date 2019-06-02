@@ -1,6 +1,9 @@
 #include "Bitmap.h"
 #include <math.h>
+#include <stdio.h>
+#include <iostream>
 #include <malloc.h>
+using namespace std;
 // O(1)
 int SetPixel(const Bitmap &bmp, int row, int col, Color color)
 {
