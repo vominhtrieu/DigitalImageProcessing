@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "Bitmap.h"
 
 #pragma pack(1)

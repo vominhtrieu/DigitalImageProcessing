@@ -17,7 +17,7 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n5.FilterWinter.\n");
+			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n4.Blur.\n5.FilterWinter.\n6.Sow Effect.\n7.Salt and Pepper Noise.\n8.Pastel.\n9.Rotate.\n");
 			scanf("%d", &option);
 			switch (option)
 			{
@@ -62,6 +62,18 @@ int main()
 				cin >> percent;
 				percent = (100 - percent) / 100;
 				FilterWinter(bmp, percent, 0.9);
+				break;
+			case 6:
+				SnowEffect(bmp);
+				break;
+			case 7:
+				SaltPepperNoise(bmp);
+				break;
+			case 8:
+				Pastel(bmp);
+				break;
+			case 9:
+				Rotate(bmp, 100);
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))

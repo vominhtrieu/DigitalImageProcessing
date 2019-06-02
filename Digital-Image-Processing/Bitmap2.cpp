@@ -1,5 +1,6 @@
 #include "Bitmap.h"
 #include <math.h>
+#include<iostream>
 
 // O(1)
 int SetPixel(const Bitmap &bmp, int row, int col, Color color)
@@ -146,19 +147,19 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 				color.B = color.B*factor;
 			
 			light = (min + max)/2;
-			if (light > 200 && light<240) {
-				k = 0.8;
+			/*if (light > 200 && light<240) {
+				k = 0.9;
 				color.R = color.R*k;
 				color.B = color.B*k;
 				color.G = color.G*k;
 			}
 			if (light>=240) {
-				k = 0.6;
+				k = 0.7;
 				color.R = color.R*k;
 				color.B = color.B*k;
 				color.G = color.G*k;
-			}
-SetPixel(bmp, row, col, color);
+			}*/
+			SetPixel(bmp, row, col, color);
 		}
 }
 
@@ -185,7 +186,7 @@ void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, doubl
 
 	Color color, color1, color2;
 	const int k = sigma / 2.5;
-	float d=10, doc1, ngang1;
+	float d=5, doc1, ngang1;
 	double gauss[10][10][10], pi = 3.14159, sum[20];
 	for (x = 0; x < 20; x++) sum[x] = 0;
 	
@@ -199,7 +200,7 @@ void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, doubl
 				gauss[x][i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
 				sum[x] += gauss[x][i][j];
 			}
-		sigma += 1;
+		sigma += 2;
 	}
 	for (x = 0; x < k; x++)
 		for (i = 0; i < gx; i++) {
@@ -282,5 +283,84 @@ void FilterWinter(Bitmap &bmp, float pt1, float pt2)
 			color.G = (color.G * (pt2));
 			
 			SetPixel(bmp, row, col, color);
+		}
+}
+void SnowEffect(Bitmap &bmp)
+{
+	Color color;
+	int row, col, h, w,x,y; h = 0;
+	while (h < bmp.height*bmp.width / 7)
+	{
+		x = rand() % bmp.height + 1;
+		y = rand() % bmp.width + 1;
+		color.B = 255; color.R = 255; color.G = 255;
+		SetPixel(bmp, x, y, color);
+		h++;
+	}
+}
+void SaltPepperNoise(Bitmap &bmp)
+{
+	Color color;
+	int rand1, rand2, row, col;
+	for(row=0;row<bmp.height;row++)
+		for (col = 0; col < bmp.width; col++)
+		{
+			rand1 = rand() % 100;
+			if (rand1 < 5)
+			{
+				rand2 = rand() % 2;
+				if (rand2 == 0)
+				{
+					color.B = 0; color.G = 0; color.R = 0;
+					SetPixel(bmp, row, col, color);
+				}
+				else
+				{
+					color.B = 255; color.R = 255; color.G = 255;
+					SetPixel(bmp, row, col, color);
+				}
+			}
+		}
+}
+void Pastel(Bitmap &bmp)
+{
+	Color color;
+	int row, col;
+	for(row=0;row<bmp.height;row++)
+		for (col = 0; col < bmp.width; col++)
+		{
+			GetPixel(bmp, row, col, color);
+
+			color.R = color.R / 2 + 127;
+			if (color.R > 255) color.R = 255;
+
+			color.B = color.B / 2 + 127;
+			if (color.B > 255) color.B = 255;
+
+			color.G = color.G / 2 + 127;
+			if (color.G > 255) color.G = 255;
+
+			SetPixel(bmp, row, col, color);
+		}
+}
+
+void Rotate(Bitmap bmp, float degree)
+{
+	Color color;
+	int rowcenter = bmp.height, colcenter = bmp.width, row, col,m,n;
+	float rowRotation, colRotation;
+	for(row=0;row<bmp.height;row++)
+		for (col = 0; col < bmp.width; col++)
+		{
+			rowRotation = (row - rowcenter)*sin(-degree) + (col - colcenter)*sin(-degree);
+			colRotation = (row - rowcenter)*cos(-degree) + (col - colcenter)*cos(-degree);
+			m = rowRotation + rowcenter;
+			n = colRotation + colcenter;
+			if(!(m>=bmp.height||m<0||n>=bmp.width||n<0))
+				for (int dem = 0; dem < 3; dem++)
+				{
+					GetPixel(bmp, m + dem, n + dem, color);
+					SetPixel(bmp, row + dem, col + dem, color);
+				}
 		}
 }

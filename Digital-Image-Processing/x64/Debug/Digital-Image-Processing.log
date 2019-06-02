@@ -1,30 +1,4 @@
-﻿  Bitmap1.cpp
-  Bitmap2.cpp
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(62): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(64): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(136): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(141): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(146): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(151): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(152): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(153): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(157): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(158): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(159): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(187): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(187): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(233): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(234): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(235): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(258): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(259): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(260): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(186): warning C4101: 'color': unreferenced local variable
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(280): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(282): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
-  main.cpp
+﻿  main.cpp
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\main.cpp(64): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\main.cpp(10): warning C4101: 'bmpout': unreferenced local variable
-  Generating Code...
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(30): warning C4715: 'GetPixel': not all control paths return a value
   Digital-Image-Processing.vcxproj -> C:\Users\Tuyet Trinh\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe
