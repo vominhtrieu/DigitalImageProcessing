@@ -6,10 +6,38 @@ void EffectOption(Bitmap &bmp)
 	cout << "\nChoose an option:"
 		<< "\n1. Filter Summer"
 		<< "\n2. Filter Winter"
+		<< "\n3. Sharpenning."
+		<< "\n4. SnowEffect."
+		<< "\n5. SaltPepperNoise"
+		<< "\n6. Pastel"
 		<< endl;
 	cin >> option;
 	switch (option)
 	{
+	case 1:
+		int percent;
+		cin >> percent;
+		FilterSummer(bmp, percent);
+		break;
+	case 2:
+		float pt1, pt2;
+		FilterWinter(bmp, pt1, pt2);
+		break;
+	case 3:
+		double L;
+		cout << " Value sharpen from 0.1 to 1.0: ";
+		cin >> L;
+		Sharpen(bmp, L);
+		break;
+	case 4:
+		SnowEffect(bmp);
+		break;
+	case 5:
+		SaltPepperNoise(bmp);
+		break;
+	case 6:
+		Pastel(bmp);
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
@@ -312,5 +340,56 @@ void ConvertToPencilSketch(Bitmap &bmp)
 			color2.G = ((int)color3.G * 255 / (255 - (int)color2.G)) > 255 ? 255 : (int)color3.G * 255 / (255 - (int)color2.G);
 			color2.R = ((int)color3.R * 255 / (255 - (int)color2.R)) > 255 ? 255 : (int)color3.R * 255 / (255 - (int)color2.R);
 			SetPixel(bmp, row, col, color2);
+		}
+}
+
+void Sharpen(const Bitmap &inbmp, double k)
+{
+	//BlurImageforpencilsketch(inbmp, 5.0);
+	//Negative(inbmp);
+	int i, j, h, w, gx = 5, gy = 5;
+	double gauss[10][10], pi = 3.14159, sum = 0;
+	double sigma = 10.0;
+	//Gaussian
+	for (i = 0; i < gx; i++)
+		for (j = 0; j < gy; j++)
+		{
+			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+			sum += gauss[i][j];
+		}
+	for (i = 0; i < gx; i++)
+	{
+		for (j = 0; j < gy; j++)
+		{
+			gauss[i][j] /= sum;
+		}
+	}
+
+	Bitmap temp = inbmp;
+	for (int row = 0; row < inbmp.height; row++)
+		for (int col = 0; col < inbmp.width; col++)
+		{
+			Color color, color2, color1;
+			GetPixel(temp, row, col, color);
+			color2.B = 0;
+			color2.G = 0;
+			color2.R = 0;
+			for (h = i; h < i + gx; h++)
+				for (w = j; w < j + gy; w++)
+				{
+
+					GetPixel(inbmp, h, w, color1);
+
+					color2.B += gauss[h - i][w - j] * color1.B;
+					color2.R += gauss[h - i][w - j] * color1.R;
+					color2.G += gauss[h - i][w - j] * color1.G;
+				}
+			double B, R, G;
+
+			B = color.B - k * color2.B;
+			G = color.G - k * color2.G;
+			R = color.R - k * color2.R;
+			color.R = Truncate(R); color.B = Truncate(B); color.G = Truncate(G);
+			SetPixel(temp, row, col, color);
 		}
 }

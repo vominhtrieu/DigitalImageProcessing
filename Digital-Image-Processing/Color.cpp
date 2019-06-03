@@ -6,7 +6,9 @@ void ColorOption(Bitmap&bmp)
 	cout << "\nChoose an option:"
 		<< "\n1. Black White"
 		<< "\n2. Negative"
-		<<"\n2.ContrastAdjustment."
+		<< "\n3. ContrastAdjustment."
+		<< "\n4. AdjustBrightness."
+		<< "\n5. BlurImage."
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -22,6 +24,15 @@ void ColorOption(Bitmap&bmp)
 		cout << "Contrast from 0 to 200: ";
 		cin >> C;
 		ContrastAdjustment(bmp, C);
+		break;
+	case 4:
+		double factor;
+		cin >> factor;
+		ContrastAdjustment(bmp, factor);
+		break;
+	case 5:
+		Toado TamElip; float ngang; float doc;
+
 		break;
 	default:
 		cout << "\nWrong option!\n";

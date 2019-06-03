@@ -10,3 +10,4 @@ void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR);
 void BunchImage(const Bitmap &bmp, int new_level);
 void FindBoundary(Bitmap &bmp, double boundary, int R);
 void ConvertToPencilSketch(Bitmap &bmp);
+void Sharpen(const Bitmap &inbmp, double k);
