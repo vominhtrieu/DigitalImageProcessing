@@ -8,8 +8,13 @@ c:\users\computer\documents\github\digital-image-processing\digital-image-proces
 c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(251): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(252): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(253): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(399): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(416): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(440): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(404): warning C4101: 'B': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(404): warning C4101: 'R': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(404): warning C4101: 'G': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(437): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(461): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(495): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(517): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(486): warning C4101: 'color': unreferenced local variable
 c:\users\computer\documents\github\digital-image-processing\digital-image-processing\bitmap2.cpp(30): warning C4715: 'GetPixel': not all control paths return a value
   Digital-Image-Processing.vcxproj -> C:\Users\COMPUTER\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe

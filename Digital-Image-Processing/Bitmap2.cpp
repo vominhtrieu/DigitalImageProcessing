@@ -367,7 +367,7 @@ bool check(int row, int col, const Bitmap bmp)
 
 void Sharpen(const Bitmap &inbmp, double k)
 {
-	int x[8] = { -1,-1,-1,0,0,1,1,1 };
+	/*int x[8] = { -1,-1,-1,0,0,1,1,1 };
 	int y[8] = { -1,0,1,-1,1,-1,0,1 };
 	Bitmap bmp;
 	for (int row = 0; row < inbmp.height; row++)
@@ -398,6 +398,27 @@ void Sharpen(const Bitmap &inbmp, double k)
 			//R = R / size; G = G / size; B = B / size;
 			color2.R = Truncate(R); color2.B = Truncate(B); color2.G = Truncate(G);
 			SetPixel(bmp, row, col, color2);
+		}*/
+	Bitmap bmp = inbmp;
+	double mask[3][3] = { {0, -1, 0}, {-1, 5, -1}, {0, -1, 0} };
+	int R, G, B;
+	Color color;
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			double linc_r = 0, linc_g = 0, linc_b = 0;
+			for (int i=0; i<3; i++)
+				for (int j = 0; j < 3; j++)
+				{
+					GetPixel(inbmp, row + i - 1, col + j - 1, color);
+					linc_r += color.R*mask[i][j];
+					linc_g += color.G*mask[i][j];
+					linc_b += color.B*mask[i][j];
+				}
+			color.R = (int)round(linc_r);
+			color.G = (int)round(linc_g);
+			color.B = (int)round(linc_b);
+			SetPixel(bmp, row, col, color);
 		}
 }
 
@@ -455,5 +476,45 @@ void Ripple(const Bitmap &bmp)
 
 void OilPainting(const Bitmap &bmp, int L)
 {
+	int x[9] = { -1,-1,-1,0,0,0,1,1,1 };
+	int y[9] = { -1,0,1,-1,0,1,-1,0,1 };
+	Bitmap inbmp=bmp;
+	int nInt[256] = { 0 }, nSumR[256] = { 0 }, nSumG[256] = { 0 }, nSumB[256] = { 0 };
+	for (int row = 0; row < bmp.height; row++)
+		for (int col = 0; col < bmp.width; col++)
+		{
+			Color color, color1, color2;
+			for (int i = 0; i < 9; i++)
+			{
+				int xM, yM;
+				xM = row + x[i];
+				yM = row + y[i];
+				if (xM >= 0 && yM >= 0 && xM < bmp.height && yM < bmp.width)
+				{
+					GetPixel(bmp, xM, yM, color1);
+					int Int = (color1.R + color1.G + color1.B)/3.0*L / 255;
+					if (Int > 255)
+						Int = 255;
+					nInt[Int]++;
+					nSumR[Int] += color1.R;
+					nSumG[Int] += color1.G;
+					nSumB[Int] += color1.B;
+				}
+			}
 
+			int nCurMax = 0;
+			int nMaxIndex = 0;
+			for (int nI = 0; nI < 256; nI++)
+			{
+				if (nInt[nI] > nCurMax)
+				{
+					nCurMax = nInt[nI];
+					nMaxIndex = nI;
+				}
+			}
+			double R, G, B;
+			R = nSumR[nMaxIndex] / nCurMax; B = nSumB[nMaxIndex] / nCurMax; G = nSumG[nMaxIndex] / nCurMax;
+			color2.R = R; color2.G = G; color2.B = B;
+			SetPixel(inbmp, row, col, color2);
+		}
 }
