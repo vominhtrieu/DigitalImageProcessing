@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <iostream>
-#include "Bitmap.h"
+#include "Effect.h"
+#include "Transform.h"
 using namespace std;
 //Test
 int main()
@@ -17,41 +16,33 @@ int main()
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
 		while (next == 'Y' || next == 'y')
 		{
-			printf("Choose an option:\n1.Black White\n2.AdjustBrightess\n3.reverse.\n");
+			cout << "Choose an option:\n"
+				<< "\n1. Transform"
+				<< "\n2. Color"
+				<< "\n3. Effect"
+				<< endl;
 			scanf("%d", &option);
 			switch (option)
 			{
 			case 1:
-				
-				BlackWhite(bmp);
+				TransfromOption(bmp);
 				break;
 			case 2:
-				AdjustBrightness(bmp, 2);
+				ColorOption(bmp);
 				break;
 			case 3:
-				int k;
-				printf("1.Dao nguoc theo be doc.\n2.dao nguoc theo be ngang\n");
-				scanf("%d", &k);
-				reverse_image(bmp,k);
+				EffectOption(bmp);
 				break;
 			default:
 				printf("Wrong command!");
 				break;
 			}
 			if (!SaveBitmap(outFileName, bmp))
-				printf("Can not save the bitmap file!!!\n");
-			#ifdef _WIN32
-				system("start out.bmp");
-			#else
-				system("open out.bmp");
-			#endif
-			printf("Would you like to continue?(Y/N)");
-			scanf("\n%c", &next);
-			#ifdef _WIN32
-				system("cls");
-			#else
-				system("clear");
-			#endif
+				cout << "Can not save the bitmap file!!!\n";
+			system("start out.bmp");
+			system("cls");
+			cout << "Would you like to continue?(Y/N)\n";
+			cin >> next;
 		}
 		DisposeBitmap(bmp);
 	}
