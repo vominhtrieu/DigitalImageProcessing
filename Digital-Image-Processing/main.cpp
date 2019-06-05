@@ -11,6 +11,7 @@ int main()
 	scanf("%s", inFileName);
 	int option;
 	char next = 'Y';
+	int q = 0;
 	if(LoadBitmap(inFileName, bmp))
 	{
 		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
@@ -20,6 +21,8 @@ int main()
 				<< "\n1. Transform"
 				<< "\n2. Color"
 				<< "\n3. Effect"
+				<< "\n4. Convert To Pencil Sketch"
+				<< "\n5. Rotate"
 				<< endl;
 			scanf("%d", &option);
 			switch (option)
@@ -32,6 +35,18 @@ int main()
 				break;
 			case 3:
 				EffectOption(bmp);
+				break;
+			case 4:
+				ConvertToPencilSketch(bmp);
+				break;
+			case 5: 
+				cout << " How many degrees do you want to rotate?" << endl;
+				cout << "90-180-270"<<endl;
+				int k;
+				cin >> k;
+				k /= 90;
+				for (q; q < k; q++)
+					Rotate(bmp);
 				break;
 			default:
 				printf("Wrong command!");
