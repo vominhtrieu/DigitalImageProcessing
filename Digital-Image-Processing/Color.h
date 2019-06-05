@@ -1,5 +1,6 @@
 #include "Bitmap.h"
 
+char Truncate(double R);
 void ColorOption(Bitmap&bmp);
 void BlackWhite(const Bitmap& bmp);
 void ContrastAdjustment(const Bitmap &bmp, int C);
