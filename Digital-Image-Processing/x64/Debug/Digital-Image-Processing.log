@@ -1,0 +1,18 @@
+﻿  Effect.cpp
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(70): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(72): warning C4244: '=': conversion from 'float' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(81): warning C4101: 'row': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(81): warning C4101: 'w': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(81): warning C4101: 'col': unreferenced local variable
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(200): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(201): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(202): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(295): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(296): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(297): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(384): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(385): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(386): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(25): warning C4700: uninitialized local variable 'pt2' used
+c:\users\computer\documents\github\digital-image-processing\digital-image-processing\effect.cpp(25): warning C4700: uninitialized local variable 'pt1' used
+  Digital-Image-Processing.vcxproj -> C:\Users\COMPUTER\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe

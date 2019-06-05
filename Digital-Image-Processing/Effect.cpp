@@ -16,6 +16,7 @@ void EffectOption(Bitmap &bmp)
 	{
 	case 1:
 		int percent;
+		cout << "percent from 0 to 100:";
 		cin >> percent;
 		FilterSummer(bmp, percent);
 		break;
@@ -52,7 +53,7 @@ void FilterSummer(const Bitmap &bmp, int percent)
 			Color color;
 			GetPixel(bmp, row, col, color);
 
-			color.B = color.R*(percent);
+			color.B = color.R*(percent/100);
 			if (color.B > 255)
 				color.B = 255;
 			SetPixel(bmp, row, col, color);
