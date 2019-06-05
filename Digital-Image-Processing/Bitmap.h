@@ -29,11 +29,4 @@ void DisposeBitmap(Bitmap &bmp);
 
 int SetPixel(const Bitmap &bmp, int row, int col, Color color);
 int GetPixel(const Bitmap &bmp, int row, int col, Color &color);
-
-void AdjustBrightness(const Bitmap &bmp, double factor);
-void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, double sigma);
-void FilterWinter(Bitmap &bmp, float pt1, float pt2);
-void SnowEffect(Bitmap &bmp);
-void SaltPepperNoise(Bitmap &bmp);
-void Pastel(Bitmap &bmp);
 #endif
