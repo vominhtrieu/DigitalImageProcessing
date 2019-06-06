@@ -10,6 +10,7 @@ void EffectOption(Bitmap &bmp)
 		<< "\n4. SnowEffect."
 		<< "\n5. SaltPepperNoise"
 		<< "\n6. Pastel"
+		<< "\n7. Convert to pencil sketch"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -38,6 +39,10 @@ void EffectOption(Bitmap &bmp)
 	case 6:
 		Pastel(bmp);
 		break;
+	case 7:
+		ConvertToPencilSketch(bmp);
+		break;
+	
 	default:
 		cout << "\nWrong option!\n";
 		break;

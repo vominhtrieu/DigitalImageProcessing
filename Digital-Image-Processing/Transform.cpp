@@ -3,9 +3,11 @@
 void TransfromOption(Bitmap &bmp)
 {
 	int option;
+	int q;
 	cout << "\nChoose an option:"
 		<< "\n1. Resize"
 		<< "\n2. Flip"
+		<< "\n3. Rotate"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -27,6 +29,16 @@ void TransfromOption(Bitmap &bmp)
 		if (option >= 1 && option <= 2)
 			Flip(bmp, option);
 		break;
+	case 3:
+		cout << " How many degrees do you want to rotate? Choose your option: " << endl;
+		cout << "\n1.90 \n2.180 \n3.270" << endl;
+		int k;
+		cin >> k;
+		k /= 90;
+		for (q; q < k; q++)
+			Rotate(bmp);
+		break;
+
 	default:
 		cout << "\nWrong option!\n";
 		break;

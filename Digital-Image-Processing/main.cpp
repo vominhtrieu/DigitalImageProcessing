@@ -21,8 +21,6 @@ int main()
 				<< "\n1. Transform"
 				<< "\n2. Color"
 				<< "\n3. Effect"
-				<< "\n4. Convert To Pencil Sketch"
-				<< "\n5. Rotate"
 				<< endl;
 			scanf("%d", &option);
 			switch (option)
@@ -36,18 +34,7 @@ int main()
 			case 3:
 				EffectOption(bmp);
 				break;
-			case 4:
-				ConvertToPencilSketch(bmp);
-				break;
-			case 5: 
-				cout << " How many degrees do you want to rotate?" << endl;
-				cout << "90-180-270"<<endl;
-				int k;
-				cin >> k;
-				k /= 90;
-				for (q; q < k; q++)
-					Rotate(bmp);
-				break;
+			
 			default:
 				printf("Wrong command!");
 				break;
