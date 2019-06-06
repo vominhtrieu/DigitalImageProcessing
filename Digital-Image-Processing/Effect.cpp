@@ -7,7 +7,7 @@ void EffectOption(Bitmap &bmp)
 		<< "\n1. Filter Summer"
 		<< "\n2. Filter Winter"
 		<< "\n3. Sharpenning."
-		<< "\n4. SnowEffect."
+		<< "\n4. SnowEffect"
 		<< "\n5. SaltPepperNoise"
 		<< "\n6. Pastel"
 		<< endl;
@@ -16,13 +16,15 @@ void EffectOption(Bitmap &bmp)
 	{
 	case 1:
 		int percent;
-		cout << "percent from 0 to 100:";
+		cout << "Percent from 0 to 100: ";
 		cin >> percent;
 		FilterSummer(bmp, percent);
 		break;
 	case 2:
-		float pt1, pt2;
-		FilterWinter(bmp, pt1, pt2);
+		float pt;
+		cout << "Percent from 0 to 100: ";
+		cin >> pt;
+		FilterWinter(bmp, pt, 0.9);
 		break;
 	case 3:
 		double L;
@@ -39,6 +41,7 @@ void EffectOption(Bitmap &bmp)
 	case 6:
 		Pastel(bmp);
 		break;
+	
 	default:
 		cout << "\nWrong option!\n";
 		break;
@@ -53,7 +56,7 @@ void FilterSummer(const Bitmap &bmp, int percent)
 			Color color;
 			GetPixel(bmp, row, col, color);
 
-			color.B = color.R*(percent/100);
+			color.B = color.R*((100-percent)/100);
 			if (color.B > 255)
 				color.B = 255;
 			SetPixel(bmp, row, col, color);
@@ -63,6 +66,7 @@ void FilterSummer(const Bitmap &bmp, int percent)
 void FilterWinter(Bitmap &bmp, float pt1, float pt2)
 {
 	Color color;
+	pt1 = (100 - pt1) / 100;
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
@@ -79,7 +83,7 @@ void SnowEffect(Bitmap &bmp)
 {
 	Color color;
 	int row, col, h, w, x, y; h = 0;
-	while (h < bmp.height*bmp.width / 7)
+	while (h < bmp.height*bmp.width / 10)
 	{
 		x = rand() % bmp.height + 1;
 		y = rand() % bmp.width + 1;
@@ -163,50 +167,6 @@ void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR)
 	PictureFrames(bmp, 15, 0);
 }
 
-void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
-{
-	int i, j, h, w;
-	double gauss[10][10], pi = 3.14159, sigma = 20.0, sum = 0;
-	Color color, color1, color2;
-
-	//Gaussian
-	for (i = 0; i < 10; i++)
-		for (j = 0; j < 10; j++)
-		{
-			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
-			sum += gauss[i][j];
-		}
-	for (i = 0; i < 10; i++) {
-		for (j = 0; j < 10; j++) {
-			gauss[i][j] /= sum;
-		}
-	}
-	//Blured Image
-	for (i = 0; i < inbmp.height; i++)
-	{
-		for (j = 0; j < inbmp.width; j++)
-		{
-			if (((i - TamElip.y)*(i - TamElip.y) / (doc*doc)) + ((j - TamElip.x)*(j - TamElip.x) / (ngang*ngang)) > 1 || (ngang == -1 || doc == -1))
-			{
-				GetPixel(inbmp, i, j, color);
-				color2.B = 0;
-				color2.G = 0;
-				color2.R = 0;
-				for (h = i; h < i + 10; h++)
-					for (w = j; w < j + 10; w++) {
-
-						GetPixel(inbmp, h, w, color1);
-
-						color2.B += gauss[h - i][w - j] * color1.B;
-						color2.R += gauss[h - i][w - j] * color1.R;
-						color2.G += gauss[h - i][w - j] * color1.G;
-					}
-
-				SetPixel(inbmp, i, j, color2);
-			}
-		}
-	}
-}
 
 void BunchImage(const Bitmap &bmp, int new_level)
 {

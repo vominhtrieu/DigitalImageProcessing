@@ -26,13 +26,33 @@ void ColorOption(Bitmap&bmp)
 		ContrastAdjustment(bmp, C);
 		break;
 	case 4:
-		double factor;
-		cin >> factor;
-		ContrastAdjustment(bmp, factor);
+		float a;
+		cout << "nhap do tang sang: ";
+		cin >> a;
+		AdjustBrightness(bmp, a);
 		break;
 	case 5:
-		Toado TamElip; float ngang; float doc;
+		Toado tam;
+		float ax, b, zigma, key;
 
+		cout << "Nhap muc do lam nhoe anh (1-10): ";
+		cin >> zigma;
+		zigma *= 2.5;
+		cout << "Nhap 1 neu ban muon lam nhoe toan anh.\nNhap 0 neu ban muon lam nhoe 1 phan anh.\n";
+		cin >> key;
+		if (key == 1)
+		{
+			BlurImage(bmp, { 0,0 }, -1, -1, zigma);
+		}
+		else
+		{
+			cout << "nhap toa do tam: " << endl;
+			cin >> tam.x >> tam.y;
+			cout << "Nhap be ngang, doc cau elip: " << endl;
+			cin >> ax; cin >> b;
+
+			BlurImage(bmp, tam, ax, b, zigma);
+		}
 		break;
 	default:
 		cout << "\nWrong option!\n";
@@ -114,23 +134,6 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 		{
 			GetPixel(bmp, row, col, color);
 
-			double  min = color.R,
-				max = color.R,
-				light,
-				k;
-
-			if (min > color.G)
-				min = color.G;
-
-			if (min > color.B)
-				min = color.B;
-
-			if (max < color.G)
-				max = color.G;
-
-			if (max < color.B)
-				max = color.B;
-
 			if (color.R*factor > 255)
 				color.R = 255;
 			else
@@ -146,21 +149,142 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 			else
 				color.B = color.B*factor;
 
-			light = (min + max) / 2;
-			/*if (light > 200 && light<240) {
-				k = 0.9;
-				color.R = color.R*k;
-				color.B = color.B*k;
-				color.G = color.G*k;
-			}
-			if (light>=240) {
-				k = 0.7;
-				color.R = color.R*k;
-				color.B = color.B*k;
-				color.G = color.G*k;
-			}*/
 			SetPixel(bmp, row, col, color);
 		}
+}
+
+void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc, double sigma)
+{
+	int i, j, h, w, gx = 10, gy = 10, x;
+
+	Color color1, color2;
+	const int k = sigma / 2.5;
+	float d = 5, doc1, ngang1;
+	double gauss[10][10][10], pi = 3.14159, sum[20];
+
+	for (x = 0; x < 20; x++) sum[x] = 0;
+
+	if (ngang < 0)
+	{
+		//Gaussian
+		for (i = 0; i < gx; i++)
+			for (j = 0; j < gy; j++)
+			{
+				gauss[0][i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+				sum[0] += gauss[0][i][j];
+			}
+		for (i = 0; i < gx; i++) {
+			for (j = 0; j < gy; j++) {
+				gauss[0][i][j] /= sum[0];
+			}
+		}
+
+		//Blur All Image
+		for (i = 0; i < inbmp.height; i++)
+			for (j = 0; j < inbmp.width; j++)
+			{
+				color2.B = 0;
+				color2.G = 0;
+				color2.R = 0;
+				for (h = i; h < i + gx; h++)
+					for (w = j; w < j + gy; w++)
+					{
+
+						GetPixel(inbmp, h, w, color1);
+
+						color2.B += gauss[0][h - i][w - j] * color1.B;
+						color2.R += gauss[0][h - i][w - j] * color1.R;
+						color2.G += gauss[0][h - i][w - j] * color1.G;
+					}
+
+
+				SetPixel(inbmp, i, j, color2);
+			}
+
+	}
+	else
+	{
+		//Gaussian
+		sigma = 0.5;
+		for (x = 0; x < k; x++)
+		{
+			for (i = 0; i < gx; i++)
+				for (j = 0; j < gy; j++)
+				{
+					gauss[x][i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+					sum[x] += gauss[x][i][j];
+				}
+			sigma += 2;
+		}
+		for (x = 0; x < k; x++)
+			for (i = 0; i < gx; i++) {
+				for (j = 0; j < gy; j++) {
+					gauss[x][i][j] /= sum[x];
+				}
+			}
+
+
+		//Blured Image
+
+		for (i = 0; i < inbmp.height; i++)
+			for (j = 0; j < inbmp.width; j++)
+			{
+				doc1 = doc; ngang1 = ngang;
+				for (x = 0; x < k; x++)
+				{
+
+					if ((i - TamElip.y)*(i - TamElip.y) / ((doc + k * d)*(doc + k * d)) +
+						((j - TamElip.x)*(j - TamElip.x) / ((ngang + d * k)*(ngang + d * k))) > 1)
+					{
+						color2.B = 0;
+						color2.G = 0;
+						color2.R = 0;
+						for (h = i; h < i + gx; h++)
+							for (w = j; w < j + gy; w++)
+							{
+
+								GetPixel(inbmp, h, w, color1);
+
+								color2.B += gauss[k - 1][h - i][w - j] * color1.B;
+								color2.R += gauss[k - 1][h - i][w - j] * color1.R;
+								color2.G += gauss[k - 1][h - i][w - j] * color1.G;
+							}
+
+
+						SetPixel(inbmp, i, j, color2);
+					}
+					else
+
+						if ((((i - TamElip.y)*(i - TamElip.y) / (doc1*doc1)) +
+							((j - TamElip.x)*(j - TamElip.x) / (ngang1*ngang1)) > 1)
+							&& (((i - TamElip.y)*(i - TamElip.y) / ((doc1 + d)*(doc1 + d))) +
+							((j - TamElip.x)*(j - TamElip.x) / ((ngang1 + d)*(ngang1 + d))) < 1))
+						{
+
+							color2.B = 0;
+							color2.G = 0;
+							color2.R = 0;
+							for (h = i; h < i + gx; h++)
+								for (w = j; w < j + gy; w++)
+								{
+
+									GetPixel(inbmp, h, w, color1);
+
+									color2.B += gauss[x][h - i][w - j] * color1.B;
+									color2.R += gauss[x][h - i][w - j] * color1.R;
+									color2.G += gauss[x][h - i][w - j] * color1.G;
+								}
+
+
+							SetPixel(inbmp, i, j, color2);
+							break;
+						}
+					doc1 += d;
+					ngang1 += d;
+				}
+
+			}
+	}
 }
 
 unsigned char ConvertColor(int *a, unsigned char A)
