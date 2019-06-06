@@ -6,9 +6,9 @@ void ColorOption(Bitmap&bmp)
 	cout << "\nChoose an option:"
 		<< "\n1. Black White"
 		<< "\n2. Negative"
-		<< "\n3. ContrastAdjustment."
-		<< "\n4. AdjustBrightness."
-		<< "\n5. BlurImage."
+		<< "\n3. Contrast Adjustment."
+		<< "\n4. Adjust Brightness."
+		<< "\n5. Blur Image."
 		<< endl;
 	cin >> option;
 	switch (option)
