@@ -3,7 +3,6 @@
 void TransfromOption(Bitmap &bmp)
 {
 	int option;
-	int q;
 	cout << "\nChoose an option:"
 		<< "\n1. Resize"
 		<< "\n2. Flip"
@@ -35,7 +34,7 @@ void TransfromOption(Bitmap &bmp)
 		int k;
 		cin >> k;
 		k /= 90;
-		for (q; q < k; q++)
+		for (int q = 0; q < k; q++)
 			Rotate(bmp);
 		break;
 

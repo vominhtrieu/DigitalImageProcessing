@@ -1,17 +1,18 @@
 #include "Effect.h"
 #include "Transform.h"
+#include <string>
 using namespace std;
 //Test
 int main()
 {
 	char *inFileName = (char*)malloc(100 * sizeof(char));
-	const char *outFileName = "out.bmp";
+	char *outFileName = (char*)malloc(100 * sizeof(char));
 	Bitmap bmp;
 	int option;
 	char next = 'Y';
 	while (next == 'Y' || next == 'y')
 	{
-		printf("Enter file path:");
+		cout << "Enter input image's path:";
 		cin >> inFileName;
 		if (LoadBitmap(inFileName, bmp))
 		{
@@ -20,7 +21,7 @@ int main()
 				<< "\n2. Color"
 				<< "\n3. Effect"
 				<< endl;
-			scanf("%d", &option);
+			cin >> option;
 			switch (option)
 			{
 			case 1:
@@ -33,21 +34,22 @@ int main()
 				EffectOption(bmp);
 				break;
 			default:
-				printf("Wrong command!");
+				cout << "Wrong command!";
 				break;
 			}
+			cout << "Enter output image's path:";
+			cin >> outFileName;
 			if (!SaveBitmap(outFileName, bmp))
 				cout << "Can not save the bitmap file!!!\n";
-			DisposeBitmap(bmp);
-			system("start out.bmp");
+			system(outFileName);
 			system("cls");
 		}
 		else
-			printf("Can not load the bitmap file!!!\n");
+			cout << "Can not load the bitmap file!!!\n";
 		cout << "Would you like to continue?(Y/N)\n";
 		cin >> next;
 	}
-	printf("Bye!\n");
+	cout << "Bye!\n";
 
 	return 0;
 }

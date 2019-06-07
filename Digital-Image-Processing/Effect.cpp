@@ -7,10 +7,10 @@ void EffectOption(Bitmap &bmp)
 		<< "\n1. Filter Summer"
 		<< "\n2. Filter Winter"
 		<< "\n3. Sharpenning."
-		<< "\n4. SnowEffect."
-		<< "\n5. SaltPepperNoise"
+		<< "\n4. Snow Effect."
+		<< "\n5. Salt Pepper Noise"
 		<< "\n6. Pastel"
-		<< "\n7. Convert to pencil sketch"
+		<< "\n7. Convert To Pencil Sketch"
 		<< endl;
 	cin >> option;
 	switch (option)
