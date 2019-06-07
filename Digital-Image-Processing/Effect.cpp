@@ -66,13 +66,13 @@ void EffectOption(Bitmap &bmp)
 		break;
 	case 10:
 		int new_level;
-		cout << "Enter bunch level of the image: \n";
+		cout << "Enter bunch level of the image (0->255): \n";
 		cin >> new_level;
 		BunchImage(bmp, new_level);
 		break;
 	case 11:
 		int boundary;
-		cout << "Enter sharp level of the image: \n";
+		cout << "Enter sharp level of the image (0->255): \n";
 		cin >> boundary;
 		FindBoundary(bmp, boundary, 2);
 		break;
