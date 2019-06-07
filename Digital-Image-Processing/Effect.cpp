@@ -12,6 +12,9 @@ void EffectOption(Bitmap &bmp)
 		<< "\n6. Pastel"
 		<< "\n7. Convert To Pencil Sketch"
 		<< "\n8. Mix Images"
+		<< "\n9. Picture Frame"
+		<< "\n10. Bunch Image"
+		<< "\n11. Create Drawing"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -52,6 +55,26 @@ void EffectOption(Bitmap &bmp)
 			MixImage(bmp, bmp2);
 		else
 			cout << "The image is not exist\n";
+		break;
+	case 9:
+		int thickness, COLOR;
+		cout << "Enter thickness of picture frame: \n";
+		cin >> thickness;
+		cout << "Enter color of picture frame (0->255): \n";
+		cin >> COLOR;
+		PictureFrames(bmp, thickness, COLOR);
+		break;
+	case 10:
+		int new_level;
+		cout << "Enter bunch level of the image: \n";
+		cin >> new_level;
+		BunchImage(bmp, new_level);
+		break;
+	case 11:
+		int boundary;
+		cout << "Enter sharp level of the image: \n";
+		cin >> boundary;
+		FindBoundary(bmp, boundary, 2);
 		break;
 	default:
 		cout << "\nWrong option!\n";
