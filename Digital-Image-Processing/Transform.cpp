@@ -7,6 +7,7 @@ void TransformOption(Bitmap &bmp)
 		<< "\n1. Resize"
 		<< "\n2. Flip"
 		<< "\n3. Rotate"
+		<< "\n4. CutImage"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -36,12 +37,21 @@ void TransformOption(Bitmap &bmp)
 		for (int q = 0; q < k; q++)
 			Rotate(bmp);
 		break;
-
+	case 4:
+		int x, y, X, Y;
+		cout << "\nCut image from position(x,y) to position(X,Y)";
+		cout << "\nEnter position(x,y):";
+		cin >> x >> y;
+		cout << "\nEnter position(X,Y):";
+		cin >> X >> Y;
+		CutImage(bmp, x, y, X, Y);
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
 	}
 }
+
 
 void Resize(Bitmap& inbmp, int width, int height)
 {
