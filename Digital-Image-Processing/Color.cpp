@@ -9,6 +9,7 @@ void ColorOption(Bitmap&bmp)
 		<< "\n3. ContrastAdjustment."
 		<< "\n4. AdjustBrightness."
 		<< "\n5. BlurImage."
+		<< "\n6. BalanceHistogram"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -32,13 +33,16 @@ void ColorOption(Bitmap&bmp)
 		break;
 	case 5:
 		Toado TamElip; float ngang; float doc;
-
+		break;
+	case 6:
+		BalanceHistogram(bmp);
 		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
 	}
 }
+
 
 void BlackWhite(const Bitmap& bmp)
 {
@@ -184,7 +188,7 @@ int* ArrayConvertColor(Bitmap bmp, int newLevel)
 					a[i]++;
 			}
 	int S = 0;
-	for (int i = 0; i < 255; i++)
+	for (int i = 0; i < 256; i++)
 	{
 		S += a[i];
 		a[i] = S;
@@ -204,8 +208,9 @@ int* ArrayConvertColor(Bitmap bmp, int newLevel)
 	return a;
 }
 
-void BalanceHistogram(const Bitmap &bmp, int newLevel)
+void BalanceHistogram(const Bitmap &bmp)
 {
+	int newLevel = 256;
 	BlackWhite(bmp);
 	int *Array = ArrayConvertColor(bmp, newLevel);
 
