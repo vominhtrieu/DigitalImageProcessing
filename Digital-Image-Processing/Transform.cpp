@@ -1,6 +1,6 @@
 #include "Transform.h"
 
-void TransfromOption(Bitmap &bmp)
+void TransformOption(Bitmap &bmp)
 {
 	int option;
 	cout << "\nChoose an option:"
@@ -33,7 +33,6 @@ void TransfromOption(Bitmap &bmp)
 		cout << "\n1.90 \n2.180 \n3.270" << endl;
 		int k;
 		cin >> k;
-		k /= 90;
 		for (int q = 0; q < k; q++)
 			Rotate(bmp);
 		break;

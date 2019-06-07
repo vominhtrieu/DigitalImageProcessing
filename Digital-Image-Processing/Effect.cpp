@@ -11,6 +11,7 @@ void EffectOption(Bitmap &bmp)
 		<< "\n5. Salt Pepper Noise"
 		<< "\n6. Pastel"
 		<< "\n7. Convert To Pencil Sketch"
+		<< "\n8. Mix Images"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -42,7 +43,16 @@ void EffectOption(Bitmap &bmp)
 	case 7:
 		ConvertToPencilSketch(bmp);
 		break;
-	
+	case 8:
+		cout << "Enter the secondary image's path:";
+		char path[100];
+		cin >> path;
+		Bitmap bmp2;
+		if (LoadBitmap(path, bmp2))
+			MixImage(bmp, bmp2);
+		else
+			cout << "The image is not exist\n";
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
@@ -397,4 +407,23 @@ void Sharpen(const Bitmap &inbmp, double k)
 			color.R = Truncate(R); color.B = Truncate(B); color.G = Truncate(G);
 			SetPixel(temp, row, col, color);
 		}
+}
+
+void MixImage(Bitmap bmp1, Bitmap bmp2)
+{
+	if (bmp1.height != bmp2.height || bmp1.width != bmp2.width)
+	{
+		cout << "Two images have different sizes\n";
+		return;
+	}
+	for (int row = 0; row < bmp1.height; row++)
+	{
+		for (int col = 0; col < bmp1.width; col++)
+		{
+			Color color1, color2;
+			GetPixel(bmp1, row, col, color1);
+			GetPixel(bmp2, row, col, color2);
+			SetPixel(bmp1, row, col, (color1 + color2) / 2);
+		}
+	}
 }

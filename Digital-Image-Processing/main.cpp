@@ -12,6 +12,7 @@ int main()
 	char next = 'Y';
 	while (next == 'Y' || next == 'y')
 	{
+		system("cls");
 		cout << "Enter input image's path:";
 		cin >> inFileName;
 		if (LoadBitmap(inFileName, bmp))
@@ -25,7 +26,7 @@ int main()
 			switch (option)
 			{
 			case 1:
-				TransfromOption(bmp);
+				TransformOption(bmp);
 				break;
 			case 2:
 				ColorOption(bmp);
@@ -34,19 +35,22 @@ int main()
 				EffectOption(bmp);
 				break;
 			default:
-				cout << "Wrong command!";
+				cout << "Wrong command!\n";
 				break;
 			}
 			cout << "Enter output image's path:";
 			cin >> outFileName;
 			if (!SaveBitmap(outFileName, bmp))
 				cout << "Can not save the bitmap file!!!\n";
-			system(outFileName);
-			system("cls");
+			else
+			{
+				system(outFileName);
+				cout << "\nIf the image does not automatically show, please open it in your OS's file explorer\n";
+			}
 		}
 		else
 			cout << "Can not load the bitmap file!!!\n";
-		cout << "Would you like to continue?(Y/N)\n";
+		cout << "\nWould you like to continue?(Y/N)\n";
 		cin >> next;
 	}
 	cout << "Bye!\n";
