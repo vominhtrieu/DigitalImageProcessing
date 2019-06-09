@@ -9,6 +9,7 @@ void ColorOption(Bitmap&bmp)
 		<< "\n3. ContrastAdjustment."
 		<< "\n4. AdjustBrightness."
 		<< "\n5. BlurImage."
+		<< "\n6. Balance histogram."
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -53,6 +54,9 @@ void ColorOption(Bitmap&bmp)
 
 			BlurImage(bmp, tam, ax, b, zigma);
 		}
+		break;
+	case 6:
+		BalanceHistogram(bmp, 256);
 		break;
 	default:
 		cout << "\nWrong option!\n";
@@ -309,7 +313,7 @@ int* ArrayConvertColor(Bitmap bmp, int newLevel)
 					a[i]++;
 			}
 	int S = 0;
-	for (int i = 0; i < 255; i++)
+	for (int i = 0; i < 256; i++)
 	{
 		S += a[i];
 		a[i] = S;
