@@ -29,7 +29,7 @@ void ColorOption(Bitmap&bmp)
 	case 4:
 		double factor;
 		cin >> factor;
-		ContrastAdjustment(bmp, factor);
+		AdjustBrightness(bmp, factor);
 		break;
 	case 5:
 		Toado TamElip; float ngang; float doc;

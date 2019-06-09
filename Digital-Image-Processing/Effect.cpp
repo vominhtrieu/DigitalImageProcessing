@@ -21,6 +21,7 @@ void EffectOption(Bitmap &bmp)
 	{
 	case 1:
 		int percent;
+		cout << "value from 0.01 to 1.00 ";
 		cin >> percent;
 		FilterSummer(bmp, percent);
 		break;
