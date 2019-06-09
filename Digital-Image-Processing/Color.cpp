@@ -8,8 +8,7 @@ void ColorOption(Bitmap&bmp)
 		<< "\n2. Negative"
 		<< "\n3. ContrastAdjustment."
 		<< "\n4. AdjustBrightness."
-		<< "\n5. BlurImage."
-		<< "\n6. Balance histogram."
+		<< "\n5. Balance histogram."
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -33,29 +32,6 @@ void ColorOption(Bitmap&bmp)
 		AdjustBrightness(bmp, a);
 		break;
 	case 5:
-		Toado tam;
-		float ax, b, zigma, key;
-
-		cout << "Nhap muc do lam nhoe anh (1-10): ";
-		cin >> zigma;
-		zigma *= 2.5;
-		cout << "Nhap 1 neu ban muon lam nhoe toan anh.\nNhap 0 neu ban muon lam nhoe 1 phan anh.\n";
-		cin >> key;
-		if (key == 1)
-		{
-			BlurImage(bmp, { 0,0 }, -1, -1, zigma);
-		}
-		else
-		{
-			cout << "nhap toa do tam: " << endl;
-			cin >> tam.x >> tam.y;
-			cout << "Nhap be ngang, doc cua elip: " << endl;
-			cin >> ax; cin >> b;
-
-			BlurImage(bmp, tam, ax, b, zigma);
-		}
-		break;
-	case 6:
 		BalanceHistogram(bmp, 256);
 		break;
 	default:

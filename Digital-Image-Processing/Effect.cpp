@@ -15,19 +15,22 @@ void EffectOption(Bitmap &bmp)
 		<< "\n9. Picture Frame"
 		<< "\n10. Bunch Image"
 		<< "\n11. Create Drawing"
+		<< "\n12. Blur Image"
 		<< endl;
 	cin >> option;
 	switch (option)
 	{
 	case 1:
-		int percent;
-		cout << "value from 0.01 to 1.00 ";
+		float percent;
+		cout << "Value from 0.01 to 1.00: ";
 		cin >> percent;
 		FilterSummer(bmp, percent);
 		break;
 	case 2:
-		float pt1, pt2;
-		FilterWinter(bmp, pt1, pt2);
+		float pt1;
+		cout << "Value from 0 to 100: ";
+		cin >> pt1;
+		FilterWinter(bmp, pt1, 0.9);
 		break;
 	case 3:
 		double L;
@@ -77,21 +80,46 @@ void EffectOption(Bitmap &bmp)
 		cin >> boundary;
 		FindBoundary(bmp, boundary, 2);
 		break;
+	case 12:
+		Toado tam;
+		float ax, b, zigma, key;
+
+		cout << "Nhap muc do lam nhoe anh (1-10): ";
+		cin >> zigma;
+		zigma *= 2.5;
+		cout << "Nhap 1 neu ban muon lam nhoe toan anh.\nNhap 0 neu ban muon lam nhoe 1 phan anh.\n";
+		cin >> key;
+		if (key == 1)
+		{
+			BlurImage(bmp, { 0,0 }, -1, -1, zigma);
+		}
+		else
+		{
+			cout << "Nhap toa do tam: " << endl;
+			cin >> tam.x >> tam.y;
+			cout << "Nhap be ngang, doc cua elip: " << endl;
+			cin >> ax; cin >> b;
+
+			BlurImage(bmp, tam, ax, b, zigma);
+		}
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
 	}
 }
 
-void FilterSummer(const Bitmap &bmp, int percent)
+void FilterSummer(Bitmap &bmp, float percent)
 {
+	Color color;
+	percent = 1.0 - percent;
+
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
-			Color color;
 			GetPixel(bmp, row, col, color);
 
-			color.B = color.R*(percent);
+			color.B = color.B*(percent);
 			if (color.B > 255)
 				color.B = 255;
 			SetPixel(bmp, row, col, color);
@@ -101,6 +129,8 @@ void FilterSummer(const Bitmap &bmp, int percent)
 void FilterWinter(Bitmap &bmp, float pt1, float pt2)
 {
 	Color color;
+	pt1 = (100 - pt1) / 100;
+
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
