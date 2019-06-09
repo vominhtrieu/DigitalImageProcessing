@@ -48,7 +48,7 @@ void ColorOption(Bitmap&bmp)
 		{
 			cout << "nhap toa do tam: " << endl;
 			cin >> tam.x >> tam.y;
-			cout << "Nhap be ngang, doc cau elip: " << endl;
+			cout << "Nhap be ngang, doc cua elip: " << endl;
 			cin >> ax; cin >> b;
 
 			BlurImage(bmp, tam, ax, b, zigma);
@@ -129,6 +129,7 @@ void Negative(const Bitmap& bmp)
 void AdjustBrightness(const Bitmap &bmp, double factor)
 {
 	Color color;
+	
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
@@ -148,7 +149,7 @@ void AdjustBrightness(const Bitmap &bmp, double factor)
 				color.B = 255;
 			else
 				color.B = color.B*factor;
-
+			
 			SetPixel(bmp, row, col, color);
 		}
 }
@@ -374,3 +375,4 @@ void NormalizeImage(Bitmap &bmp, int newMin, int newMax)
 		}
 	}
 }
+

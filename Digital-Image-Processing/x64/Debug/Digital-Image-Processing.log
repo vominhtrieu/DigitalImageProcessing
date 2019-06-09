@@ -1,19 +1,19 @@
 ﻿  Color.cpp
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(93): warning C4309: 'return': truncation of constant value
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(94): warning C4244: 'return': conversion from 'double' to 'char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(140): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(145): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(150): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(161): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(161): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(195): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(141): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(146): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(151): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(162): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(162): warning C4244: 'initializing': conversion from 'double' to 'const int', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(196): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(197): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(248): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(198): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(249): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(250): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(273): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(251): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(274): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
 c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(275): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
-c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(295): warning C4715: 'ConvertColor': not all control paths return a value
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(276): warning C4244: '+=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\tuyet trinh\documents\github\digital-image-processing\digital-image-processing\color.cpp(296): warning C4715: 'ConvertColor': not all control paths return a value
   Digital-Image-Processing.vcxproj -> C:\Users\Tuyet Trinh\Documents\GitHub\Digital-Image-Processing\x64\Debug\Digital-Image-Processing.exe
