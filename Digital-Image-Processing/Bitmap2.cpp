@@ -1,5 +1,4 @@
 #include "Bitmap.h"
-#include <math.h>
 
 Color operator + (Color color1, Color color2)
 {

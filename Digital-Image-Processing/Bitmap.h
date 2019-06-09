@@ -1,8 +1,6 @@
 #ifndef _BITMAP_
 #define _BITMAP_
 #include <iostream>
-#include <math.h>
-#include <stdio.h>
 #include <fstream>
 using namespace std;
 #pragma warning(disable:4996)
