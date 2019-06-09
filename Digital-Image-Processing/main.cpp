@@ -1,31 +1,32 @@
 #include "Effect.h"
 #include "Transform.h"
+#include <string>
 using namespace std;
 //Test
 int main()
 {
-	char *inFileName = (char*)malloc(100*sizeof(char));
-	const char *outFileName= "out.bmp";
+	char *inFileName = (char*)malloc(100 * sizeof(char));
+	char *outFileName = (char*)malloc(100 * sizeof(char));
 	Bitmap bmp;
-	printf("Enter file path:");
-	scanf("%s", inFileName);
 	int option;
 	char next = 'Y';
-	if(LoadBitmap(inFileName, bmp))
+	while (next == 'Y' || next == 'y')
 	{
-		printf("Image Size: %dx%d\n", bmp.width, bmp.height);
-		while (next == 'Y' || next == 'y')
+		system("cls");
+		cout << "Enter input image's path:";
+		cin >> inFileName;
+		if (LoadBitmap(inFileName, bmp))
 		{
 			cout << "Choose an option:\n"
 				<< "\n1. Transform"
 				<< "\n2. Color"
 				<< "\n3. Effect"
 				<< endl;
-			scanf("%d", &option);
+			cin >> option;
 			switch (option)
 			{
 			case 1:
-				TransfromOption(bmp);
+				TransformOption(bmp);
 				break;
 			case 2:
 				ColorOption(bmp);
@@ -34,22 +35,25 @@ int main()
 				EffectOption(bmp);
 				break;
 			default:
-				printf("Wrong command!");
+				cout << "Wrong command!\n";
 				break;
 			}
+			cout << "Enter output image's path:";
+			cin >> outFileName;
 			if (!SaveBitmap(outFileName, bmp))
 				cout << "Can not save the bitmap file!!!\n";
-			system("start out.bmp");
-			system("cls");
-			cout << "Would you like to continue?(Y/N)\n";
-			cin >> next;
+			else
+			{
+				system(outFileName);
+				cout << "\nIf the image does not automatically show, please open it in your OS's file explorer\n";
+			}
 		}
-		DisposeBitmap(bmp);
+		else
+			cout << "Can not load the bitmap file!!!\n";
+		cout << "\nWould you like to continue?(Y/N)\n";
+		cin >> next;
 	}
-	else
-		printf("Can not load the bitmap file!!!\n");
-	
-	printf("Bye!\n");
-	
+	cout << "Bye!\n";
+
 	return 0;
 }

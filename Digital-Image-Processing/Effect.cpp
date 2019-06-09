@@ -7,24 +7,27 @@ void EffectOption(Bitmap &bmp)
 		<< "\n1. Filter Summer"
 		<< "\n2. Filter Winter"
 		<< "\n3. Sharpenning."
-		<< "\n4. SnowEffect"
-		<< "\n5. SaltPepperNoise"
+		<< "\n4. Snow Effect."
+		<< "\n5. Salt Pepper Noise"
 		<< "\n6. Pastel"
+		<< "\n7. Convert To Pencil Sketch"
+		<< "\n8. Mix Images"
+		<< "\n9. Picture Frame"
+		<< "\n10. Bunch Image"
+		<< "\n11. Create Drawing"
 		<< endl;
 	cin >> option;
 	switch (option)
 	{
 	case 1:
 		int percent;
-		cout << "Percent from 0 to 100: ";
+		cout << "value from 0.01 to 1.00 ";
 		cin >> percent;
 		FilterSummer(bmp, percent);
 		break;
 	case 2:
-		float pt;
-		cout << "Percent from 0 to 100: ";
-		cin >> pt;
-		FilterWinter(bmp, pt, 0.9);
+		float pt1, pt2;
+		FilterWinter(bmp, pt1, pt2);
 		break;
 	case 3:
 		double L;
@@ -41,7 +44,39 @@ void EffectOption(Bitmap &bmp)
 	case 6:
 		Pastel(bmp);
 		break;
-	
+	case 7:
+		ConvertToPencilSketch(bmp);
+		break;
+	case 8:
+		cout << "Enter the secondary image's path:";
+		char path[100];
+		cin >> path;
+		Bitmap bmp2;
+		if (LoadBitmap(path, bmp2))
+			MixImage(bmp, bmp2);
+		else
+			cout << "The image is not exist\n";
+		break;
+	case 9:
+		int thickness, COLOR;
+		cout << "Enter thickness of picture frame: \n";
+		cin >> thickness;
+		cout << "Enter color of picture frame (0->255): \n";
+		cin >> COLOR;
+		PictureFrames(bmp, thickness, COLOR);
+		break;
+	case 10:
+		int new_level;
+		cout << "Enter bunch level of the image (0->255): \n";
+		cin >> new_level;
+		BunchImage(bmp, new_level);
+		break;
+	case 11:
+		int boundary;
+		cout << "Enter sharp level of the image (0->255): \n";
+		cin >> boundary;
+		FindBoundary(bmp, boundary, 2);
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
@@ -56,7 +91,7 @@ void FilterSummer(const Bitmap &bmp, int percent)
 			Color color;
 			GetPixel(bmp, row, col, color);
 
-			color.B = color.R*((100-percent)/100);
+			color.B = color.R*(percent);
 			if (color.B > 255)
 				color.B = 255;
 			SetPixel(bmp, row, col, color);
@@ -66,7 +101,6 @@ void FilterSummer(const Bitmap &bmp, int percent)
 void FilterWinter(Bitmap &bmp, float pt1, float pt2)
 {
 	Color color;
-	pt1 = (100 - pt1) / 100;
 	for (int row = 0; row < bmp.height; row++)
 		for (int col = 0; col < bmp.width; col++)
 		{
@@ -83,7 +117,7 @@ void SnowEffect(Bitmap &bmp)
 {
 	Color color;
 	int row, col, h, w, x, y; h = 0;
-	while (h < bmp.height*bmp.width / 10)
+	while (h < bmp.height*bmp.width / 7)
 	{
 		x = rand() % bmp.height + 1;
 		y = rand() % bmp.width + 1;
@@ -167,6 +201,50 @@ void PictureFrames(Bitmap &bmp, int thickness, unsigned char COLOR)
 	PictureFrames(bmp, 15, 0);
 }
 
+void BlurImage(const Bitmap &inbmp, Toado TamElip, float ngang, float doc)
+{
+	int i, j, h, w;
+	double gauss[10][10], pi = 3.14159, sigma = 20.0, sum = 0;
+	Color color, color1, color2;
+
+	//Gaussian
+	for (i = 0; i < 10; i++)
+		for (j = 0; j < 10; j++)
+		{
+			gauss[i][j] = exp(-(i*i + j * j)*1.0 / (2 * sigma)) / (2 * pi*sigma*sigma);
+			sum += gauss[i][j];
+		}
+	for (i = 0; i < 10; i++) {
+		for (j = 0; j < 10; j++) {
+			gauss[i][j] /= sum;
+		}
+	}
+	//Blured Image
+	for (i = 0; i < inbmp.height; i++)
+	{
+		for (j = 0; j < inbmp.width; j++)
+		{
+			if (((i - TamElip.y)*(i - TamElip.y) / (doc*doc)) + ((j - TamElip.x)*(j - TamElip.x) / (ngang*ngang)) > 1 || (ngang == -1 || doc == -1))
+			{
+				GetPixel(inbmp, i, j, color);
+				color2.B = 0;
+				color2.G = 0;
+				color2.R = 0;
+				for (h = i; h < i + 10; h++)
+					for (w = j; w < j + 10; w++) {
+
+						GetPixel(inbmp, h, w, color1);
+
+						color2.B += gauss[h - i][w - j] * color1.B;
+						color2.R += gauss[h - i][w - j] * color1.R;
+						color2.G += gauss[h - i][w - j] * color1.G;
+					}
+
+				SetPixel(inbmp, i, j, color2);
+			}
+		}
+	}
+}
 
 void BunchImage(const Bitmap &bmp, int new_level)
 {
@@ -353,4 +431,23 @@ void Sharpen(const Bitmap &inbmp, double k)
 			color.R = Truncate(R); color.B = Truncate(B); color.G = Truncate(G);
 			SetPixel(temp, row, col, color);
 		}
+}
+
+void MixImage(Bitmap bmp1, Bitmap bmp2)
+{
+	if (bmp1.height != bmp2.height || bmp1.width != bmp2.width)
+	{
+		cout << "Two images have different sizes\n";
+		return;
+	}
+	for (int row = 0; row < bmp1.height; row++)
+	{
+		for (int col = 0; col < bmp1.width; col++)
+		{
+			Color color1, color2;
+			GetPixel(bmp1, row, col, color1);
+			GetPixel(bmp2, row, col, color2);
+			SetPixel(bmp1, row, col, (color1 + color2) / 2);
+		}
+	}
 }

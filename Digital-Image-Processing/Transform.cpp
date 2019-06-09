@@ -1,11 +1,13 @@
 #include "Transform.h"
 
-void TransfromOption(Bitmap &bmp)
+void TransformOption(Bitmap &bmp)
 {
 	int option;
 	cout << "\nChoose an option:"
 		<< "\n1. Resize"
 		<< "\n2. Flip"
+		<< "\n3. Rotate"
+		<< "\n4. CutImage"
 		<< endl;
 	cin >> option;
 	switch (option)
@@ -27,11 +29,29 @@ void TransfromOption(Bitmap &bmp)
 		if (option >= 1 && option <= 2)
 			Flip(bmp, option);
 		break;
+	case 3:
+		cout << " How many degrees do you want to rotate? Choose your option: " << endl;
+		cout << "\n1.90 \n2.180 \n3.270" << endl;
+		int k;
+		cin >> k;
+		for (int q = 0; q < k; q++)
+			Rotate(bmp);
+		break;
+	case 4:
+		int x, y, X, Y;
+		cout << "\nCut image from position(x,y) to position(X,Y)";
+		cout << "\nEnter position(x,y):";
+		cin >> x >> y;
+		cout << "\nEnter position(X,Y):";
+		cin >> X >> Y;
+		CutImage(bmp, x, y, X, Y);
+		break;
 	default:
 		cout << "\nWrong option!\n";
 		break;
 	}
 }
+
 
 void Resize(Bitmap& inbmp, int width, int height)
 {

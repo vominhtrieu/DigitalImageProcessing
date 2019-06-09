@@ -11,3 +11,4 @@ void BunchImage(const Bitmap &bmp, int new_level);
 void FindBoundary(Bitmap &bmp, double boundary, int R);
 void ConvertToPencilSketch(Bitmap &bmp);
 void Sharpen(const Bitmap &inbmp, double k);
+void MixImage(Bitmap bmp1, Bitmap bmp2);

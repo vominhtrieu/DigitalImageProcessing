@@ -1,6 +1,6 @@
 #include "Bitmap.h"
 
-void TransfromOption(Bitmap &bmp);
+void TransformOption(Bitmap &bmp);
 void Resize(Bitmap& inbmp, int width, int height);
 void Flip(const Bitmap &bmp, int k);
 void Rotate(Bitmap &inbmp);

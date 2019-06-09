@@ -29,4 +29,7 @@ void DisposeBitmap(Bitmap &bmp);
 
 int SetPixel(const Bitmap &bmp, int row, int col, Color color);
 int GetPixel(const Bitmap &bmp, int row, int col, Color &color);
+
+Color operator + (Color color1, Color color2);
+Color operator / (Color color, int n);
 #endif
